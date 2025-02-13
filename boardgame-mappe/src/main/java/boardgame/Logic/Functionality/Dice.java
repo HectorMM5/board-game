@@ -1,13 +1,22 @@
 package boardgame.Logic.Functionality;
 import java.util.Random;
-
+import java.util.ArrayList;
 
 public class Dice {
-    public static final Random dice = new Random();
+    private ArrayList<Die> dice = new ArrayList<>();
 
-
-    public static int rollDice() {
-        return dice.nextInt(1, 6);
+    public Dice(int numberOfDice) {
+        for (int i = 0; i < numberOfDice; i++) {
+            dice.add(new Die());
+        }
     }
 
+    public int roll() {
+        int sum = 0;
+        for (Die die : dice) {
+            die.roll();
+            sum += die.getValue();
+        }
+        return sum;
+    }
 }
