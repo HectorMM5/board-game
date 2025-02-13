@@ -1,4 +1,4 @@
-package boardgame;
+package boardgame.Logic.Functionality;
 
 public class Board {
     

@@ -1,5 +1,5 @@
-package boardgame.Entities;
-import boardgame.Dice;
+package boardgame.Logic.Entities;
+import boardgame.Logic.Functionality.Dice;
 
 public class Player {
     final String icon;
