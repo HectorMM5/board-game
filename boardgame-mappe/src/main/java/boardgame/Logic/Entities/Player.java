@@ -16,5 +16,9 @@ public class Player {
         position += Dice.rollDice();
     }
 
+    public void moveToTile(Tile tile) {
+        
+    }
+
 
 }
