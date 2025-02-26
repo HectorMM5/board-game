@@ -12,7 +12,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <javafx.version>23.0.2</javafx.version>
-        <main.class>boardgame.Visuals.JavaFXTest</main.class> <!-- Set Main JavaFX Class -->
+        <main.class>boardgame.Visuals.BoardVisual</main.class> <!-- Set Main JavaFX Class -->
     </properties>
 
     <dependencies>
