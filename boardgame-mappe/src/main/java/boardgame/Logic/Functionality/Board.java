@@ -10,12 +10,12 @@ public class Board {
     private final Rules rules;
 
     public Board(int tileAmount, Rules rules) {
-    this.tiles = new HashMap<>();
-    this.rules = rules;
+        this.tiles = new HashMap<>();
+        this.rules = rules;
 
-    IntStream.rangeClosed(1, tileAmount)
-        .forEach(i -> tiles.put(i, new Tile(i)));
-}
+        IntStream.rangeClosed(1, tileAmount)
+            .forEach(i -> tiles.put(i, new Tile(i)));
+    }
 
     public HashMap<Integer, Tile> getTiles() {
         return tiles;
@@ -24,5 +24,7 @@ public class Board {
     public Rules getRules() {
         return rules;
     }
+
+    
     
 }
