@@ -12,8 +12,16 @@ public class Player {
         this.position = 0;
     }
 
-    public void advance() {
-        position += Dice.rollDice();
+
+    public void move(int moveAmount) {
+        position += moveAmount;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     public void moveToTile(Tile tile) {
