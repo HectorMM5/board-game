@@ -18,6 +18,16 @@ public class Rules {
         
     }
 
+    public Dice getDice() {
+        return dice;
+    }
+
+    public ArrayList<Effect> getEffects() {
+        return effects;
+    }
+
+    
+
     
    
 }
