@@ -19,15 +19,16 @@ public class BoardVisual extends Application {
         GridPane gridPane = new GridPane();
 
         
-        IntStream.range(0, gridSize * gridSize)
-                .forEach(i -> {
+        IntStream.range(0, gridSize)
+        .forEach(row -> {  
+            IntStream.range(0, gridSize)
+                .forEach(col -> {  
                     Rectangle tile = createTile();
-                    int row = i / gridSize; 
-                    int col = i % gridSize; 
                     gridPane.add(tile, col, row); 
                 });
+        });
 
-        // Set the scene size dynamically based on TILE_SIZE
+
         Scene scene = new Scene(gridPane, gridSize * TILE_SIZE, gridSize * TILE_SIZE);
 
         primaryStage.setTitle("Tile Grid");
