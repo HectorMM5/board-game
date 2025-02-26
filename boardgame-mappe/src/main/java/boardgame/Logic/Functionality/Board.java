@@ -1,24 +1,28 @@
 package boardgame.Logic.Functionality;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
+import boardgame.Logic.Entities.Rules;
 import boardgame.Logic.Entities.Tile;   
 
 public class Board {
     private final HashMap<Integer, Tile> tiles;
+    private final Rules rules;
 
-    public Board(ArrayList<Tile> tileList) {
-        this.tiles = new HashMap<>();
+    public Board(int tileAmount, Rules rules) {
+    this.tiles = new HashMap<>();
+    this.rules = rules;
 
-        for (Tile tile : tileList) {
-            tiles.put(tile.getNumber(), tile);
-        }
-    }
+    IntStream.rangeClosed(1, tileAmount)
+        .forEach(i -> tiles.put(i, new Tile()));
+}
 
-    // Optional: Getter to access tiles
     public HashMap<Integer, Tile> getTiles() {
         return tiles;
     }
 
+    public Rules getRules() {
+        return rules;
+    }
     
 }
