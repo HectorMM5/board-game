@@ -1,4 +1,4 @@
-package boardgame;
+package boardgame.Logic.Functionality;
 
 import java.util.Random;
 
@@ -12,8 +12,8 @@ public class Die {
   }
 
   public int roll(int max) {
-    lastRolledValue = Die.nextInt(1, max + 1);
-    return lastRolledValue;
+  
+    return 0;
   }
 
   public int getValue() {
