@@ -12,8 +12,8 @@ public class Die {
   }
 
   public int roll(int max) {
-  
-    return 0;
+    lastRolledValue = RANDOM.nextInt(1,max+1);
+    return lastRolledValue;
   }
 
   public int getValue() {
