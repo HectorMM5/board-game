@@ -14,7 +14,7 @@ public class Board {
     this.rules = rules;
 
     IntStream.rangeClosed(1, tileAmount)
-        .forEach(i -> tiles.put(i, new Tile()));
+        .forEach(i -> tiles.put(i, new Tile(i)));
 }
 
     public HashMap<Integer, Tile> getTiles() {
