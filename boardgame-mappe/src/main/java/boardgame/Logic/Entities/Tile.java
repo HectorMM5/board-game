@@ -24,7 +24,11 @@ public class Tile {
     }
 
     public void setPlayer(Player recievedPlayer) {
-        player = recievedPlayer;
+        this.player = recievedPlayer;
+    }
+
+    public void setEffect(Effect effect) {
+        this.effect = effect;
     }
    
 }

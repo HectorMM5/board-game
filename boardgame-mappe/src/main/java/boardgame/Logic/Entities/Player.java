@@ -1,4 +1,5 @@
 package boardgame.Logic.Entities;
+import boardgame.Logic.Functionality.Dice;
 
 public class Player {
     final String icon;
@@ -11,8 +12,16 @@ public class Player {
         this.position = 0;
     }
 
-    public void advance() {
-        
+
+    public void move(int moveAmount) {
+        position += moveAmount;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     public void moveToTile(Tile tile) {
