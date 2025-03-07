@@ -19,11 +19,13 @@ public class Board {
     private final Random randomGenerator = new Random();
     private final HashMap<Integer, Tile> tiles;
     private final HashMap<Integer, Effect> effects;
+    private final ArrayList<Player> players;
     private final Rules rules;
 
-    public Board(int tileAmount, Rules rules) {
+    public Board(int tileAmount, ArrayList<Player> players, Rules rules) {
         this.tiles = new HashMap<>();
         this.effects = new HashMap<>();
+        this.players = players;
         this.rules = rules;
 
         IntStream.rangeClosed(1, tileAmount)

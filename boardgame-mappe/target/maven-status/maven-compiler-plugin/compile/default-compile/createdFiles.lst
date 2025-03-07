@@ -1,9 +1,9 @@
-boardgame\Logic\Functionality\Board.class
 boardgame\Logic\Entities\Player.class
 boardgame\Logic\Functionality\Die.class
-boardgame\Logic\Functionality\Dice.class
-boardgame\Visuals\JavaFXTest.class
 boardgame\Main.class
-boardgame\Logic\Entities\Rules.class
 boardgame\Logic\Entities\Tile.class
+boardgame\Logic\Functionality\Board.class
+boardgame\Logic\Functionality\Dice.class
+boardgame\Logic\Entities\Rules.class
+Menu.class
 boardgame\Logic\Entities\Effect.class
