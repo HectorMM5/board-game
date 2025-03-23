@@ -1,10 +1,13 @@
-C:\Users\jeg\OneDrive - NTNU\Dokumenter\dev\git\prog 2 mappe\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Entities\Effect.java
-C:\Users\jeg\OneDrive - NTNU\Dokumenter\dev\git\prog 2 mappe\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Entities\Player.java
-C:\Users\jeg\OneDrive - NTNU\Dokumenter\dev\git\prog 2 mappe\board-game\boardgame-mappe\src\main\java\boardgame\Main.java
-C:\Users\jeg\OneDrive - NTNU\Dokumenter\dev\git\prog 2 mappe\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Functionality\Board.java
-C:\Users\jeg\OneDrive - NTNU\Dokumenter\dev\git\prog 2 mappe\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Functionality\Dice.java
-C:\Users\jeg\OneDrive - NTNU\Dokumenter\dev\git\prog 2 mappe\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Entities\Tile.java
-C:\Users\jeg\OneDrive - NTNU\Dokumenter\dev\git\prog 2 mappe\board-game\boardgame-mappe\src\main\java\boardgame\Visuals\JavaFXTest.java
-C:\Users\jeg\OneDrive - NTNU\Dokumenter\dev\git\prog 2 mappe\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Entities\Rules.java
-C:\Users\jeg\OneDrive - NTNU\Dokumenter\dev\git\prog 2 mappe\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Functionality\Rules.java
-C:\Users\jeg\OneDrive - NTNU\Dokumenter\dev\git\prog 2 mappe\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Functionality\Die.java
+C:\Users\hekto\Documents\Prog2 prosjekt\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Entities\BaseEffects\PlaceholderEffect.java
+C:\Users\hekto\Documents\Prog2 prosjekt\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Entities\BaseEffects\SnakeEffect.java
+C:\Users\hekto\Documents\Prog2 prosjekt\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Entities\Tile.java
+C:\Users\hekto\Documents\Prog2 prosjekt\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Entities\Player.java
+C:\Users\hekto\Documents\Prog2 prosjekt\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Entities\Rules.java
+C:\Users\hekto\Documents\Prog2 prosjekt\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Entities\BaseEffects\LadderEffect.java
+C:\Users\hekto\Documents\Prog2 prosjekt\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Entities\Effect.java
+C:\Users\hekto\Documents\Prog2 prosjekt\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Functionality\Board.java
+C:\Users\hekto\Documents\Prog2 prosjekt\board-game\boardgame-mappe\src\main\java\boardgame\Visuals\BoardVisual.java
+C:\Users\hekto\Documents\Prog2 prosjekt\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Functionality\Dice.java
+C:\Users\hekto\Documents\Prog2 prosjekt\board-game\boardgame-mappe\src\main\java\boardgame\Visuals\LadderVisual.java
+C:\Users\hekto\Documents\Prog2 prosjekt\board-game\boardgame-mappe\src\main\java\boardgame\Main.java
+C:\Users\hekto\Documents\Prog2 prosjekt\board-game\boardgame-mappe\src\main\java\boardgame\Logic\Functionality\Die.java
