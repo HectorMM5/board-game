@@ -47,4 +47,5 @@ public class SnakeEffect implements Effect {
         
     }
     
+    
 }

@@ -10,7 +10,6 @@ import boardgame.Logic.Entities.Rules;
 import boardgame.Logic.Entities.Tile;
 
 
-
 public class Board {
 
     public static final Random randomGenerator = new Random();
