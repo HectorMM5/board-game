@@ -1,14 +1,8 @@
 boardgame\Logic\Entities\Player.class
-boardgame\Logic\Functionality\Die.class
 boardgame\Logic\Entities\BaseEffects\PlaceholderEffect.class
-boardgame\Main.class
+boardgame\Logic\Functionality\Board$1.class
 boardgame\Logic\Entities\BaseEffects\LadderEffect.class
-boardgame\Visuals\BoardVisual.class
 boardgame\Logic\Entities\Tile.class
-boardgame\Visuals\LadderVisual.class
-boardgame\Logic\Functionality\Board.class
-boardgame\Logic\Functionality\Dice.class
 boardgame\Logic\Entities\BaseEffects\SnakeEffect.class
-boardgame\Logic\Functionality\Board$effectType.class
 boardgame\Logic\Entities\Rules.class
 boardgame\Logic\Entities\Effect.class

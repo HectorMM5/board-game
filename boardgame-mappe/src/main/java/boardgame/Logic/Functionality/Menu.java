@@ -51,11 +51,6 @@ public class Menu {
             players.add(new Player("ICON", playerName));
 
         }
-
-        Board gameBoard = new Board(100, players, rules);
-
-
-
     }
 
 

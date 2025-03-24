@@ -1,6 +1,7 @@
 package boardgame.Logic.Entities;
 
 public class Tile {
+    
     private Player player;
     private Effect effect;
     private int effectTarget;

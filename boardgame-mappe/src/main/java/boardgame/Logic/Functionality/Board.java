@@ -6,7 +6,6 @@ import java.util.stream.IntStream;
 
 import boardgame.Logic.Entities.Effect;
 import boardgame.Logic.Entities.Player;
-import boardgame.Logic.Entities.Rules;
 import boardgame.Logic.Entities.Tile;
 
 
@@ -14,34 +13,29 @@ public class Board {
 
     public static final Random randomGenerator = new Random();
     private static final ArrayList<Tile> tiles = new ArrayList<>();
-    private final ArrayList<Effect> effects = new ArrayList<>();
-    private final Rules rules;
+    private static final ArrayList<Effect> effects = new ArrayList<>();
+    //private static final Rules rules = new Rules(effects, 100);
     
 
-    public Board(int tileAmount, Rules rules) {
-        
-        this.rules = rules;
-
-        IntStream.rangeClosed(1, tileAmount)
+    static {
+        IntStream.rangeClosed(1, 100)
                 .forEach(i -> tiles.add(new Tile(i)));
     }
 
-    public ArrayList<Tile> getTiles() {
+    public static ArrayList<Tile> getTiles() {
         return tiles;
     }
 
-    public Rules getRules() {
-        return rules;
-    }
+    //public static Rules getRules() {
+    //    return rules;
+    //}
 
-    public void movePlayer(Player player, Tile tile) {
+    public static void movePlayer(Player player, Tile tile) {
         player.setPosition(tile.getNumber());
 
         if (!(tile.getEffect() == null)) {
             tile.getEffect().execute(player);
         }
-        
-
     }
 
     public static Tile getTileInIndex(int index) {
