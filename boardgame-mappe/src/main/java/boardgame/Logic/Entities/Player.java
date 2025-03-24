@@ -24,7 +24,7 @@ public class Player {
     }
 
     public void moveToTile(Tile tile) {
-        
+        position = tile.getNumber();
     }
 
     public String getIcon() {
