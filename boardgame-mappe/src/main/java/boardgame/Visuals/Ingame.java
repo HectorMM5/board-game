@@ -7,8 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class Ingame extends Application {
-    @Override
+public class Ingame {
+
     public void start(Stage primaryStage) {
 
         Board testBoard = new Board();
@@ -32,8 +32,5 @@ public class Ingame extends Application {
 
         boardVisual.updateTileVisual(0, 0);
     }
-    
-    public static void main(String[] args) {
-        launch(args);
-    }
+
 }
