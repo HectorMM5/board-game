@@ -6,16 +6,14 @@ import boardgame.Logic.Entities.Tile;
 import boardgame.Logic.Functionality.Board;
 import javafx.scene.layout.GridPane;
 
-public class BoardVisual extends GridPane{
+public class BoardVisual extends GridPane {
     private static final int TILE_AMOUNT = 10; 
-    private ArrayList<Tile> tileLogic;
-    private TileVisual[][] tileViews;
-    private Board board;
+    private final ArrayList<Tile> tileLogic;
+    private final ArrayList<TileVisual> tileViews;
 
     public BoardVisual(Board board) {
         this.tileLogic = board.getTiles();
-        this.tileViews = new TileVisual[TILE_AMOUNT][TILE_AMOUNT];
-        this.board = board;
+        this.tileViews = new ArrayList<>();
         
         initializeBoard();
     }
@@ -24,37 +22,28 @@ public class BoardVisual extends GridPane{
         this.setHgap(4); // horizontal gap between tiles
         this.setVgap(4); // vertical gap between tiles
         this.setStyle("-fx-background-color: lightblue;"); // background visible in gaps
-        
-        for (int row = 0; row < TILE_AMOUNT; row++) {
 
-            for (int col = 0; col < TILE_AMOUNT; col++) {
-                Tile tile = tileLogic.get(row * col);
-                TileVisual tileVisual = new TileVisual(tile);
-                tileViews[row][col] = tileVisual;
+        for (int i = 0; i < TILE_AMOUNT*TILE_AMOUNT; i++) {
 
-                this.add(tileVisual, col, row);
-            }
+            Tile tile = tileLogic.get(i);
+            TileVisual tileVisual = new TileVisual(tile);
+
+            tileViews.add(tileVisual);
+
+            this.add(tileVisual, i % 10, i / 10);
+            
         }
-    }
-
-    public void updateTileVisual(int row, int col) {
-        tileViews[row][col].updateVisual();
     }
 
     public void updateEntireBoard() {
-        for (int row = 0; row < TILE_AMOUNT; row++) {
-            for (int col = 0; col < TILE_AMOUNT; col++) {
-                tileViews[row][col].updateVisual();
-            }
+        for (TileVisual tv : tileViews) {
+            tv.updateVisual();
         }
+        
     }
 
-    public BoardVisual getBoard() {
+    public BoardVisual getBoardVisual() {
         return this;
-    }
-
-    public Board getBoardObject() {
-        return board;
     }
 
 }

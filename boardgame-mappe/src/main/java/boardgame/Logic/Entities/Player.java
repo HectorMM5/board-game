@@ -11,11 +11,6 @@ public class Player {
         this.position = 0;
     }
 
-
-    public void move(int moveAmount) {
-        position += moveAmount;
-    }
-
     public int getPosition() {
         return position;
     }

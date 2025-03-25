@@ -8,21 +8,23 @@ import boardgame.Logic.Entities.Effect;
 import boardgame.Logic.Entities.Player;
 import boardgame.Logic.Entities.Tile;
 
-
 public class Board {
-
-    public static final Random randomGenerator = new Random();
-    private static final ArrayList<Tile> tiles = new ArrayList<>();
-    private static final ArrayList<Effect> effects = new ArrayList<>();
+    public final Random randomGenerator;
+    private final ArrayList<Tile> tiles;
+    private final ArrayList<Effect> effects;
     //private static final Rules rules = new Rules(effects, 100);
-    
 
-    static {
+    public Board() {
+        this.randomGenerator = new Random();;
+        this.tiles = new ArrayList<>();
+        this.effects = new ArrayList<>();
+
         IntStream.rangeClosed(1, 100)
-                .forEach(i -> tiles.add(new Tile(i)));
-    }
+            .forEach(i -> tiles.add(new Tile(i)));
 
-    public static ArrayList<Tile> getTiles() {
+    }
+    
+    public ArrayList<Tile> getTiles() {
         return tiles;
     }
 
@@ -30,15 +32,26 @@ public class Board {
     //    return rules;
     //}
 
-    public static void movePlayer(Player player, Tile tile) {
-        player.setPosition(tile.getNumber());
+    public void movePlayer(Player player, int tileNumber) {
+        tiles.get(player.getPosition()).setPlayer(null);
 
-        if (!(tile.getEffect() == null)) {
-            tile.getEffect().execute(player);
+        player.setPosition(tileNumber);
+        Tile targetTile = tiles.get(tileNumber);
+        targetTile.setPlayer(player);
+
+        if (!(targetTile.getEffect() == null)) {
+            targetTile.getEffect().execute(player);
         }
     }
 
-    public static Tile getTileInIndex(int index) {
+    public void moveBy(Player player, int steps) {
+        int nextPosition = player.getPosition() + steps;
+
+        movePlayer(player, nextPosition);
+
+    }
+
+    public Tile getTileInIndex(int index) {
         return tiles.get(index);
     }
 
@@ -46,7 +59,7 @@ public class Board {
     public void createMovementEffect(effectType type) {
         int targetTileIndex = randomGenerator.nextInt(0, 100);
         //Selected tiles may already have an effect; if so, reroll
-        while (Board.getTileInIndex(targetTileIndex).getEffect() != null) {
+        while (getTileInIndex(targetTileIndex).getEffect() != null) {
             targetTileIndex = randomGenerator.nextInt(0, 100);
         }
 
@@ -62,7 +75,8 @@ public class Board {
                 throw new IllegalArgumentException("Illegal effect type.");
         }
     }
-    
+
    
+
 
 }

@@ -38,6 +38,7 @@ public class Tile {
         if (effect != null) {
             effect.execute(player);
         }
+
     }
 
     public void setEffect(Effect effect) {

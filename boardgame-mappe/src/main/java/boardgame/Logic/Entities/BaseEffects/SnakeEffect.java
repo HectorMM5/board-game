@@ -11,8 +11,10 @@ public class SnakeEffect implements Effect {
 
     private int baseTileIndex;
     private int targetTileIndex;
+    private Board board;
 
-    public SnakeEffect(int baseTileIndex, int targetTileIndex) {
+    public SnakeEffect(Board board, int baseTileIndex, int targetTileIndex) {
+        this.board = board;
         this.baseTileIndex = baseTileIndex;
         this.targetTileIndex = targetTileIndex;
     }
@@ -27,14 +29,14 @@ public class SnakeEffect implements Effect {
 
         //MUST BE FIXED WHEN BASETILE RNG GIVES HIGH NUMBER. MAY NEED MULTIIPLE REROLLS TO GET WITHIN THE LOW %
         //eg. basetile = 97 has only 98, 99 and 100 as valid values, but rng runs from 1-100
-        targetTileIndex = Board.randomGenerator.nextInt(1, baseTileIndex);
+        targetTileIndex = randomGenerator.nextInt(1, baseTileIndex);
 
         //Selected tiles may already have an effect; if so, reroll
-        while (Board.getTileInIndex(targetTileIndex).getEffect() != null) {
-            targetTileIndex = Board.randomGenerator.nextInt(1, baseTileIndex);
+        while (board.getTileInIndex(targetTileIndex).getEffect() != null) {
+            targetTileIndex = randomGenerator.nextInt(1, baseTileIndex);
         }
 
-        Board.getTileInIndex(targetTileIndex).setEffect(new PlaceholderEffect());
+        board.getTileInIndex(targetTileIndex).setEffect(new PlaceholderEffect());
         
         return this;
         
@@ -43,7 +45,7 @@ public class SnakeEffect implements Effect {
     @Override
     public void execute(Player player) {
         player.setPosition(targetTileIndex);
-        Board.getTileInIndex(targetTileIndex).setPlayer(player);
+        board.getTileInIndex(targetTileIndex).setPlayer(player);
         
     }
     
