@@ -1,8 +1,8 @@
 package boardgame;
 
-import boardgame.Visuals.GameInterface;
-import javafx.stage.Stage;
+import boardgame.visual.elements.GameInterface;
 import javafx.application.Application;
+import javafx.stage.Stage;
 
 public class Main extends Application {
     @Override
