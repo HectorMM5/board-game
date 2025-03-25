@@ -2,13 +2,15 @@ package boardgame.Visuals.views;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
-import javafx.scene.text.Text;
+import javafx.scene.layout.VBox;
 
 public class GameInitScreen {
     public Stage primaryStage;
@@ -21,8 +23,12 @@ public class GameInitScreen {
 
         primaryStage.setTitle("Snakes & Ladders config");
 
-
+        VBox menuWrapper = new VBox();
         GridPane menuPane = new GridPane();
+        menuWrapper.getChildren().add(menuPane);
+        menuPane.setAlignment(Pos.CENTER);
+        menuWrapper.setMargin(menuPane, new Insets(50,50,50,50));
+
         Button b1 = new Button("Preset1");
         Button b2 = new Button("Preset2");
         Button b3 = new Button("Preset3");
@@ -39,7 +45,7 @@ public class GameInitScreen {
         b3.setStyle(buttonStyle);
         b4.setStyle(buttonStyle);
 
-        Scene menu = new Scene(menuPane, 600, 600);
+        Scene menu = new Scene(menuWrapper, 600, 600);
         menuPane.add(b1,0,0);
         menuPane.add(b2,1,0);
         menuPane.add(b3,3,0);

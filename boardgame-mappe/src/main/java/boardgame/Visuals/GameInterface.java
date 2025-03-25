@@ -7,6 +7,8 @@ import boardgame.Visuals.views.SnakesAndLaddersInitScreen;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -15,6 +17,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+
 import javafx.scene.control.SplitPane;
 
 public class GameInterface {
@@ -28,8 +32,12 @@ public class GameInterface {
 
         primaryStage.setTitle("primaryStage");
 
-
+        VBox menuWrapper = new VBox();
         GridPane menuPane = new GridPane();
+        menuWrapper.getChildren().add(menuPane);
+        menuPane.setAlignment(Pos.CENTER);
+        menuWrapper.setMargin(menuPane, new Insets(50,50,50,50));
+
         Button b1 = new Button("Snakes & ladders");
         Button b2 = new Button("Goose game???");
         Button b3 = new Button("Ludo!");
@@ -41,7 +49,7 @@ public class GameInterface {
         });
 
 
-        Scene menu = new Scene(menuPane, 600, 600);
+        Scene menu = new Scene(menuWrapper, 600, 600);
         menuPane.getChildren().addAll(b1, b2, b3);
         GridPane.setColumnIndex(b1,0);
         GridPane.setColumnIndex(b2,1);
