@@ -11,12 +11,9 @@ public class Player {
         this.position = 0;
     }
 
-    public int getPosition() {
-        return position;
-    }
-    public void setPosition(int position) {
-        this.position = position;
-    }
+
+    public int getPosition() { return position; }
+    public void setPosition(int position) { this.position = position; }
 
     public void moveToTile(Tile tile) {
         position = tile.getNumber();
@@ -25,9 +22,9 @@ public class Player {
     public String getIcon() {
         return icon;
     }
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
+    public void setIcon(String icon) { this.icon = icon; }
+
+    public String getName() { return name; }
 
 
 }

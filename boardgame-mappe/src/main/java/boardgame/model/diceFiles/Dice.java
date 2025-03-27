@@ -2,7 +2,7 @@ package boardgame.model.diceFiles;
 import java.util.ArrayList;
 
 public class Dice {
-    private static ArrayList<Die> dice = new ArrayList<>();
+    private static final ArrayList<Die> dice = new ArrayList<>();
 
     public Dice(int numberOfDice) {
         for (int i = 0; i < numberOfDice; i++) {

@@ -13,25 +13,20 @@ import com.opencsv.CSVWriter;
 public class PlayerCSV {
 
     // Defines player CSV file
-    private static final File file = new File("playerProfiles.csv");
+    private static final File FILE = new File("playerProfiles.csv");
 
     private static ArrayList<String[]> getCSVContent() {
         ArrayList<String[]> allPlayers = new ArrayList<>();
 
-        try {
-            // create FileWriter object with file as parameter 
-            CSVReader reader = new CSVReader(new FileReader(file));
-
+        try ( // create FileWriter object with file as parameter
+                CSVReader reader = new CSVReader(new FileReader(FILE))) {
             String[] row;
             while ((row = reader.readNext()) != null) {
                 //Saves the CSV content locally
                 allPlayers.add(row);
             }
-
-            reader.close();
-
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException("Failed to read CSV player file.");
         }
 
         return allPlayers;
@@ -39,15 +34,11 @@ public class PlayerCSV {
     }
 
     private static void rewriteFile(ArrayList<String[]> allPlayers) {
-        try {
-            CSVWriter writer = new CSVWriter(new FileWriter(file));
 
+        try (CSVWriter writer = new CSVWriter(new FileWriter(FILE))) {
             writer.writeAll(allPlayers);
-
-            writer.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Failed to read CSV player file.");
         }
 
     }
@@ -58,14 +49,14 @@ public class PlayerCSV {
         ArrayList<String[]> allPlayers = getCSVContent();
 
         Iterator<String[]> iterator = allPlayers.iterator();
-        
+
         while (iterator.hasNext()) {
             if (iterator.next()[0].equals(name)) {
                 throw new IllegalArgumentException("A player profile with the given name already exists.");
             }
         }
-        
-        allPlayers.add(new String[] {name, icon, "0"});
+
+        allPlayers.add(new String[]{name, icon, "0"});
 
         rewriteFile(allPlayers);
 

@@ -10,11 +10,11 @@ import javafx.scene.layout.HBox;
 
 
 public class DiceButtonController {
-    private Board board;
-    private BoardVisual boardVisual;
-    private ButtonVisual buttonVisual;
+    private final Board board;
+    private final BoardVisual boardVisual;
+    private final ButtonVisual buttonVisual;
     private Player playerWhoseTurn;
-    private Dice dice;
+    private final Dice dice;
 
     
     public DiceButtonController(Board board, BoardVisual boardVisual, Player playerWhoseTurn) {

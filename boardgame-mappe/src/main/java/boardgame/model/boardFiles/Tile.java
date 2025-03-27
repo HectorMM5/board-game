@@ -7,7 +7,7 @@ public class Tile {
     private Player player;
     private Effect effect;
     private int effectTarget;
-    private int number;
+    private final int number;
 
     public Tile(int number) {
         this.number = number;
