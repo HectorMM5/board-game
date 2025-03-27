@@ -1,7 +1,7 @@
 package boardgame.model.boardFiles;
 
 public class Player {
-    final String icon;
+    private String icon;
     final String name;
     int position;
 
@@ -24,6 +24,9 @@ public class Player {
 
     public String getIcon() {
         return icon;
+    }
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
 
