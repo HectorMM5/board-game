@@ -10,8 +10,6 @@ public class Rules {
     private final int diceSize;
     private final Dice dice;
 
-
-
     Rules(ArrayList<Effect> effects, int diceSize) {
         this.effects = effects;
         this.diceSize = diceSize;

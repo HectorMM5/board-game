@@ -30,6 +30,7 @@ public class Ingame extends Application {
         BorderPane root = new BorderPane();
         root.setCenter(boardVisual);       // The game board in the center
         root.setBottom(DBController.getButtonVisual());       // The roll dice button at the bottom
+        root.getChildren().addAll(new LadderVisual().getLadder());
 
         Scene scene = new Scene(root, 600, 600);
         primaryStage.setTitle("Board Game");
