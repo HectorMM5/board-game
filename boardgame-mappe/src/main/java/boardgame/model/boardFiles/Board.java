@@ -1,8 +1,11 @@
-package boardgame.model;
+package boardgame.model.boardFiles;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.IntStream;
+
+import boardgame.model.effectFiles.Effect;
+import boardgame.model.effectFiles.effectType;
 
 public class Board {
     public final Random randomGenerator;

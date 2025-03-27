@@ -1,4 +1,4 @@
-package boardgame.model;
+package boardgame.model.boardFiles;
 
 public class Player {
     final String icon;

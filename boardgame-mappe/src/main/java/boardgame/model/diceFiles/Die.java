@@ -1,4 +1,4 @@
-package boardgame.model;
+package boardgame.model.diceFiles;
 
 import java.util.Random;
 

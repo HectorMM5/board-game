@@ -2,8 +2,8 @@ package boardgame.visual.elements;
 
 import java.util.ArrayList;
 
-import boardgame.model.Board;
-import boardgame.model.Tile;
+import boardgame.model.boardFiles.Board;
+import boardgame.model.boardFiles.Tile;
 import javafx.scene.layout.GridPane;
 
 public class BoardVisual extends GridPane {

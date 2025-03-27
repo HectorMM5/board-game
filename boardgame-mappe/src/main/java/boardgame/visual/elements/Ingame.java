@@ -3,8 +3,8 @@ package boardgame.visual.elements;
 import java.util.ArrayList;
 
 import boardgame.controller.DiceButtonController;
-import boardgame.model.Board;
-import boardgame.model.Player;
+import boardgame.model.boardFiles.Board;
+import boardgame.model.boardFiles.Player;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;

@@ -1,6 +1,9 @@
-package boardgame.model;
+package boardgame.model.boardFiles;
 
 import java.util.ArrayList;
+
+import boardgame.model.diceFiles.Dice;
+import boardgame.model.effectFiles.Effect;
 
 public class Rules {
     private final ArrayList<Effect> effects;

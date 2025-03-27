@@ -1,7 +1,7 @@
 package boardgame.visual.elements;
 
-import boardgame.model.Player;
-import boardgame.model.Tile;
+import boardgame.model.boardFiles.Player;
+import boardgame.model.boardFiles.Tile;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

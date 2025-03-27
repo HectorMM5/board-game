@@ -2,6 +2,9 @@ package boardgame.model;
 
 import java.util.ArrayList;
 
+import boardgame.model.boardFiles.Player;
+import boardgame.model.boardFiles.Rules;
+
 public class Menu {
     
     private static int playerCount;

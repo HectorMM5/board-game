@@ -1,7 +1,7 @@
 package boardgame.visual.elements;
 
 import boardgame.controller.DiceButtonController;
-import boardgame.model.Dice;
+import boardgame.model.diceFiles.Dice;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
