@@ -1,8 +1,7 @@
-package boardgame.model.BaseEffects;
+package boardgame.model.effectFiles;
 
-import boardgame.model.Effect;
-import boardgame.model.Player;
-import boardgame.model.Tile;
+import boardgame.model.boardFiles.Player;
+import boardgame.model.boardFiles.Tile;
 
 public class PlaceholderEffect implements Effect {
     

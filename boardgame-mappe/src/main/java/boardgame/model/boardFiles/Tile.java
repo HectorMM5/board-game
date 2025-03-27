@@ -1,4 +1,6 @@
-package boardgame.model;
+package boardgame.model.boardFiles;
+
+import boardgame.model.effectFiles.Effect;
 
 public class Tile {
     

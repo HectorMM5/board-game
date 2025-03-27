@@ -1,4 +1,4 @@
-package boardgame.model;
+package boardgame.model.effectFiles;
 
 public enum effectType {
     LADDER,

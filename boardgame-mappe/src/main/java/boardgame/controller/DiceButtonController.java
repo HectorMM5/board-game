@@ -1,9 +1,9 @@
 package boardgame.controller;
 
 
-import boardgame.model.Board;
-import boardgame.model.Dice;
-import boardgame.model.Player;
+import boardgame.model.boardFiles.Board;
+import boardgame.model.boardFiles.Player;
+import boardgame.model.diceFiles.Dice;
 import boardgame.visual.elements.BoardVisual;
 import boardgame.visual.elements.ButtonVisual;
 import javafx.scene.layout.HBox;
