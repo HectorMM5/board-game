@@ -14,7 +14,7 @@ public class Board {
     //private static final Rules rules = new Rules(effects, 100);
 
     public Board() {
-        this.randomGenerator = new Random();;
+        this.randomGenerator = new Random();
         this.tiles = new ArrayList<>();
         this.effects = new ArrayList<>();
 

@@ -6,14 +6,14 @@ public class Die {
   public static final Random RANDOM = new Random();
   private int lastRolledValue;
 
-  public int roll() {
+  public void roll() {
     lastRolledValue = RANDOM.nextInt(1, 7);
-    return lastRolledValue;
+    //return lastRolledValue;
   }
 
-  public int roll(int max) {
+  public void roll(int max) {
     lastRolledValue = RANDOM.nextInt(1, max + 1);
-    return lastRolledValue;
+    //return lastRolledValue;
   }
 
   public int getValue() {

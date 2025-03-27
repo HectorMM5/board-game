@@ -1,7 +1,6 @@
 package boardgame.visual.elements;
 
 import boardgame.controller.DiceButtonController;
-import boardgame.model.diceFiles.Dice;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
@@ -14,8 +13,6 @@ public class ButtonVisual {
     }
 
     public HBox getPane() {
-
-        Dice dice = new Dice(1);
 
         Button rollDiceButton = new Button("Roll dice");
         rollDiceButton.setOnAction(e -> {

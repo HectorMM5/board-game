@@ -27,7 +27,7 @@ public class DiceButtonController {
     }
 
     public void handleRollDice() {
-        board.moveBy(playerWhoseTurn, 1);
+        board.moveBy(playerWhoseTurn, dice.roll());
         boardVisual.updateEntireBoard();
         
     }

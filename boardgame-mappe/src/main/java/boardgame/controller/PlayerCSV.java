@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -66,7 +65,7 @@ public class PlayerCSV {
             }
         }
         
-        allPlayers.add(new String[]{name, icon, "0"});
+        allPlayers.add(new String[] {name, icon, "0"});
 
         rewriteFile(allPlayers);
 
