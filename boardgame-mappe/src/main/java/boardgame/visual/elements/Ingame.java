@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import boardgame.controller.DiceButtonController;
 import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Player;
+import boardgame.model.effectFiles.effectType;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -23,7 +24,7 @@ public class Ingame extends Application {
         DBController.setPlayerWhoseTurn(testPlayer);
         board.getTiles().get(0).setPlayer(testPlayer);
 
-        
+        board.createMovementEffect(effectType.LADDER, 3);
         
         // Layout that will hold both board and button
         BorderPane root = new BorderPane();
@@ -34,6 +35,8 @@ public class Ingame extends Application {
         primaryStage.setTitle("Board Game");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        boardVisual.updateEntireBoard();
 
     }
     

@@ -6,13 +6,11 @@ public class Tile {
     
     private Player player;
     private Effect effect;
-    private int effectTarget;
     private final int number;
 
     public Tile(int number) {
         this.number = number;
         this.effect = null;
-        this.effectTarget = -1;
         this.player = null;
 
     }
@@ -23,10 +21,6 @@ public class Tile {
 
     public Effect getEffect() {
         return effect;
-    }
-
-    public int getEffectTarget() {
-        return effectTarget;
     }
 
     public Player getPlayer() {
@@ -49,15 +43,7 @@ public class Tile {
         
     }
 
-    public void setEffectTarget(int targetTileNumber) {
-        this.effectTarget = targetTileNumber;
-    }
 
-
-    public void setupEffect(Effect effect) {
-        effect.setup(this);
-        
-    }
 
 
 

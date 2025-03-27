@@ -25,11 +25,16 @@ public class TileVisual extends StackPane {
         
         Label viewNumber = new Label(Integer.toString(tile.getNumber()));
 
+
         this.getChildren().addAll(background, viewNumber, iconView);
 
     }
 
     public void updateVisual() {
+        if (tile.getEffect() != null) {
+            this.background.setFill(Color.rgb(205, 84, 84));
+        }
+        
         Player player = tile.getPlayer();
         if (player != null) {
             String iconPath = player.getIcon();
