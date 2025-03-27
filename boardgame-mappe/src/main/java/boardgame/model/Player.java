@@ -1,7 +1,7 @@
 package boardgame.model;
 
 public class Player {
-    final String icon;
+    private String icon;
     final String name;
     int position;
 
