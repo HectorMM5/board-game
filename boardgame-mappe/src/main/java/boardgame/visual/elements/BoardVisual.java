@@ -7,7 +7,6 @@ import boardgame.model.boardFiles.Tile;
 import javafx.scene.layout.GridPane;
 
 public class BoardVisual extends GridPane {
-    private static final int TILE_AMOUNT = 10; 
     private final ArrayList<Tile> tileLogic;
     private final ArrayList<TileVisual> tileViews;
 
