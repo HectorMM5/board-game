@@ -23,15 +23,25 @@ public class BoardVisual extends GridPane {
         this.setVgap(4); // vertical gap between tiles
         this.setStyle("-fx-background-color: lightblue;"); // background visible in gaps
 
-        for (int i = 0; i < TILE_AMOUNT*TILE_AMOUNT; i++) {
+        Boolean movesRight = false;
+
+        for (int i = 0; i < 90; i++) {
 
             Tile tile = tileLogic.get(i);
             TileVisual tileVisual = new TileVisual(tile);
 
             tileViews.add(tileVisual);
 
-            this.add(tileVisual, i % 10, i / 10);
-            
+            if ((i % 10) == 0) { movesRight = !movesRight; }           
+
+            if (movesRight) {
+                this.add(tileVisual, i % 10, i / 10);
+
+            } else {
+                this.add(tileVisual, 10 - ((i % 10) + 1), i / 10);
+
+            }
+
         }
     }
 
