@@ -11,15 +11,15 @@ public class LadderVisual extends Group {
     
     public LadderVisual() {
         Rectangle leftPillar = new Rectangle();
-        leftPillar.setY(50);
-        leftPillar.setX(20);
+        leftPillar.setY(5);
+        leftPillar.setX(5);
         leftPillar.setWidth(10);
         leftPillar.setHeight(100);
         leftPillar.setFill(Color.RED);
 
         Rectangle rightPillar = new Rectangle();
-        rightPillar.setY(50);
-        rightPillar.setX(40);
+        rightPillar.setY(5);
+        rightPillar.setX(35);
         rightPillar.setWidth(10);
         rightPillar.setHeight(100);
         rightPillar.setFill(Color.RED);
@@ -29,11 +29,14 @@ public class LadderVisual extends Group {
         int height = 100;
 
         ArrayList<Rectangle> steps = new ArrayList<>();
-        IntStream.rangeClosed(0, height / 30)
+
+        int stepAmount = height/25;
+
+        IntStream.rangeClosed(0, stepAmount - 2)
             .forEach(i -> {
                 Rectangle step = new Rectangle();
-                step.setX(20);
-                step.setY(50 + i*30);
+                step.setX(15);
+                step.setY(25 + i*25);
                 step.setWidth(20);
                 step.setHeight(5);
                 step.setFill(Color.RED);
