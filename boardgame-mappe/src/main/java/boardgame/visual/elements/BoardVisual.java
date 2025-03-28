@@ -7,10 +7,12 @@ import boardgame.model.boardFiles.Tile;
 import javafx.scene.layout.GridPane;
 
 public class BoardVisual extends GridPane {
+    private final Board board;
     private final ArrayList<Tile> tileLogic;
     private final ArrayList<TileVisual> tileViews;
 
     public BoardVisual(Board board) {
+        this.board = board;
         this.tileLogic = board.getTiles();
         this.tileViews = new ArrayList<>();
         
@@ -40,9 +42,9 @@ public class BoardVisual extends GridPane {
                 this.add(tileVisual, 10 - ((i % 10) + 1), i / 10);
 
             }
-
         }
     }
+
 
     public void updateEntireBoard() {
         for (TileVisual tv : tileViews) {
@@ -54,5 +56,10 @@ public class BoardVisual extends GridPane {
     public BoardVisual getBoardVisual() {
         return this;
     }
+
+    public void displayEffects() {
+        
+    }
+
 
 }

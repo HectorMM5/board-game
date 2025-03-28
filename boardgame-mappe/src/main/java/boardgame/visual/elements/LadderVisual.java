@@ -3,13 +3,14 @@ package boardgame.visual.elements;
 import java.util.ArrayList;
 import java.util.stream.IntStream;
 
+import boardgame.model.effectFiles.LadderEffect;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class LadderVisual extends Group {
     
-    public LadderVisual() {
+    public LadderVisual(LadderEffect ladder) {
         Rectangle leftPillar = new Rectangle();
         leftPillar.setY(5);
         leftPillar.setX(5);

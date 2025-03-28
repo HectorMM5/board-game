@@ -1,6 +1,7 @@
 package boardgame.model.boardFiles;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -11,12 +12,12 @@ import boardgame.model.effectFiles.effectType;
 public class Board {
     public final Random randomGenerator;
     private final ArrayList<Tile> tiles;
-    private final ArrayList<Effect> effects;
+    private final HashMap<Tile, Effect> effectMap;
 
     public Board() {
         this.randomGenerator = new Random();
         this.tiles = new ArrayList<>();
-        this.effects = new ArrayList<>();
+        this.effectMap = new HashMap<>();
         
 
         IntStream.rangeClosed(1, 100)
@@ -31,6 +32,12 @@ public class Board {
     public Tile getTileInIndex(int index) {
         return tiles.get(index);
     }
+
+    public HashMap<Tile, Effect> getEffectMap() {
+        return effectMap;
+    }
+
+    
 
     //public static Rules getRules() {
     //    return rules;

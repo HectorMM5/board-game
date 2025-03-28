@@ -48,4 +48,8 @@ public class TileVisual extends StackPane {
 
     }
 
+    public Tile getTile() {
+        return tile;
+    }
+
 }  

@@ -45,5 +45,13 @@ public class LadderEffect implements Effect {
 
     }
 
+    public int getBaseTileIndex() {
+        return baseTileIndex;
+    }
+
+    public int getTargetTileIndex() {
+        return targetTileIndex;
+    }
+
     
 }
