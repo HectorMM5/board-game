@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,18 +25,19 @@ public class GameInitScreen {
     private String[] playerNames = new String[playerCount];
     List<String> imagePaths = new ArrayList<>();
     List<Button> playerButtons = new ArrayList<>();
-    List<TextField> playerTextFields = new ArrayList<>();
     List<HBox> playerFieldWrappers = new ArrayList<>();
-
+    List<Button> saveButtons = new ArrayList<>();
+    List<ComboBox> playerDropdowns = new ArrayList<>();
+    ArrayList<Integer> playerIconIndexes = new ArrayList<>();
+    private VBox playerWrapper;
 
     public GameInitScreen(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
     public void init() {
-
         primaryStage.setTitle("Snakes & Ladders config");
-        loadImages("/PlayerIcons/");
+        loadImages();
 
         VBox menuWrapper = new VBox();
         HBox menuPane = new HBox();
@@ -51,37 +54,29 @@ public class GameInitScreen {
         presetBtn1.setStyle(buttonStyle);
         presetBtn2.setStyle(buttonStyle);
         presetBtn3.setStyle(buttonStyle);
-
         menuPane.getChildren().addAll(presetBtn1,presetBtn2,presetBtn3);
 
-        VBox playerWrapper = new VBox();
-        TextField playerNameField = new TextField("playername");
-        for (int i = 0; i < playerCount; i++) {
-            playerTextFields.add(new TextField());
-            playerTextFields.get(i).setPromptText("Player " + (i + 1));
-            playerButtons.add(new Button());
-            playerFieldWrappers.add(new HBox());
-            playerFieldWrappers.get(i).getChildren().addAll(playerButtons.get(i), playerTextFields.get(i));
-            playerFieldWrappers.get(i).setAlignment(Pos.CENTER);
-
-            int finalI = i;
-            playerButtons.get(i).setOnAction(new EventHandler<ActionEvent>() {
-                @Override public void handle(ActionEvent e) {
-                    ImageView buttonIMG = new ImageView(new Image("/PlayerIcons/xd.png"));
-                    buttonIMG.setFitHeight(40);
-                    buttonIMG.setFitWidth(40);
-                    playerButtons.get(finalI).setGraphic(buttonIMG);
-                }
-            });
-        }
+        Button addPlayerBtn = new Button("Add Player");
+        addPlayerBtn.setStyle(buttonStyle);
+        HBox addPlayerBtnWrapper = new HBox();
+        addPlayerBtnWrapper.getChildren().add(addPlayerBtn);
+        addPlayerBtnWrapper.setAlignment(Pos.CENTER);
+        menuWrapper.getChildren().add(addPlayerBtnWrapper);
 
 
-        playerWrapper.getChildren().addAll(playerFieldWrappers);
+        playerWrapper = new VBox();
+        playerWrapper.setSpacing(10);
+        addPlayerBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                addPlayer();
+            }
+        });
+
+
         VBox.setMargin(playerWrapper, new Insets(0,0,50,0));
         menuWrapper.getChildren().add(playerWrapper);
 
 
-        //start game button
         Button startGameBtn = new Button("Start game!");
         startGameBtn.setStyle(buttonStyle);
         HBox startButtonWrapper = new HBox();
@@ -89,7 +84,7 @@ public class GameInitScreen {
         startButtonWrapper.getChildren().add(startGameBtn);
         menuWrapper.getChildren().add(startButtonWrapper);
 
-        //button action
+
         startGameBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 GameInitScreen.this.startGame(startGameBtn);
@@ -98,6 +93,52 @@ public class GameInitScreen {
 
         Scene menu = new Scene(menuWrapper);
         primaryStage.setScene(menu);
+    }
+
+    private void addPlayer(){
+        int index = playerFieldWrappers.size();
+
+        ComboBox<String> playerDropdown = new ComboBox<>();
+        playerDropdown.setPromptText("Player " + (index + 1));
+        playerDropdown.setEditable(true);
+        playerDropdown.setPrefHeight(40);
+        playerDropdowns.add(playerDropdown);
+
+        Button playerButton = new Button();
+        playerButtons.add(playerButton);
+
+        playerIconIndexes.add(0);
+
+        ImageView buttonIMG = new ImageView(new Image(imagePaths.get(0)));
+        buttonIMG.setFitHeight(40);
+        buttonIMG.setFitWidth(40);
+        playerButton.setGraphic(buttonIMG);
+
+        HBox playerFieldWrapper = new HBox(10); // 10px spacing
+        playerFieldWrapper.getChildren().addAll(playerButton, playerDropdown);
+        playerFieldWrapper.setAlignment(Pos.CENTER);
+        playerFieldWrappers.add(playerFieldWrapper);
+
+        playerWrapper.getChildren().add(playerFieldWrapper);
+
+        final int finalIndex = index;
+        playerButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                int currentIndex = playerIconIndexes.get(finalIndex);
+                if (currentIndex < imagePaths.size() - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0;
+                }
+
+                playerIconIndexes.set(finalIndex, currentIndex);
+
+                ImageView buttonIMG = new ImageView(new Image(imagePaths.get(currentIndex)));
+                buttonIMG.setFitHeight(40);
+                buttonIMG.setFitWidth(40);
+                playerButton.setGraphic(buttonIMG);
+            }
+        });
     }
 
     public void startGame(Button button){
@@ -109,21 +150,17 @@ public class GameInitScreen {
         primaryStage.show();
     }
 
-    private void loadImages(String path) {
+    private void loadImages() {
+        String path = "src/main/resources/PlayerIcons/";
         imagePaths = new ArrayList<>();
         File dir = new File(path);
         if (dir.isDirectory()) {
-            for (File file : dir.listFiles((d, name) -> name.endsWith(".png") || name.endsWith(".jpg") || name.endsWith(".webp") || name.endsWith(".gif"))) {
+            for (File file : dir.listFiles()) {
                 imagePaths.add(file.toURI().toString());
             }
         }
+        else{
+            System.out.println("Not a directory");
+        }
     }
-
-
-
-    private void changePlayerImage(int playerIndex){
-
-    }
-
 }
-
