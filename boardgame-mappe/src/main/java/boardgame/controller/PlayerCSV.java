@@ -13,7 +13,7 @@ import com.opencsv.CSVWriter;
 public class PlayerCSV {
 
     // Defines player CSV file
-    private static final File FILE = new File("playerProfiles.csv");
+    private static final File FILE = new File("src/main/resources/playerProfiles.csv");
 
     private static ArrayList<String[]> getCSVContent() {
         ArrayList<String[]> allPlayers = new ArrayList<>();
@@ -101,6 +101,15 @@ public class PlayerCSV {
 
         rewriteFile(allPlayers);
 
+    }
+
+    public String[] getPlayerNames() {
+        ArrayList<String[]> content = getCSVContent();
+        String[] playerNames = new String[content.size()];
+        for (int i = 0; i < playerNames.length; i++) {
+            playerNames[i] = content.get(i)[0];
+        }
+        return playerNames;
     }
 
 }
