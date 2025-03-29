@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import com.opencsv.CSVReader;
@@ -44,7 +45,7 @@ public class PlayerCSV {
     }
 
     //Taken and adapted from GeeksForGeeks
-    public static void registerNewPlayer(String name, String icon) {
+    public void registerNewPlayer(String name, String icon) {
 
         ArrayList<String[]> allPlayers = getCSVContent();
 
@@ -112,4 +113,15 @@ public class PlayerCSV {
         return playerNames;
     }
 
+    public String getPlayerIconByPlayerName(String playerName) {
+        ArrayList<String[]> content = getCSVContent();
+
+        for (String[] row : content) {
+            if (row[0].equals(playerName)) {
+                return row[1];
+            }
+        }
+
+        throw new IllegalArgumentException("Player not found.");
+    }
 }
