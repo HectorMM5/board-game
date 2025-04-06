@@ -11,7 +11,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <javafx.version>23.0.2</javafx.version>
+        <javafx.version>21.0.6</javafx.version>
         <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
         <main.class>boardgame.Main</main.class>
     </properties>
@@ -38,7 +38,14 @@
             <groupId>com.opencsv</groupId> 
             <artifactId>opencsv</artifactId> 
             <version>4.1</version> 
-        </dependency> 
+        </dependency>
+
+        <!-- Jackson Core and Databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.0</version>
+        </dependency>
     </dependencies>
 
     <build>
