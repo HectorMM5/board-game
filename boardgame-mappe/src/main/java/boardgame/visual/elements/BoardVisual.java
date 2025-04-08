@@ -26,20 +26,20 @@ public class BoardVisual extends GridPane {
 
         Boolean movesRight = false;
 
-        for (int i = 0; i < 90; i++) {
+        for (int i = 0; i < this.board.getTileCount(); i++) {
 
             Tile tile = tileLogic.get(i);
             TileVisual tileVisual = new TileVisual(tile);
 
             tileViews.add(tileVisual);
 
-            if ((i % 10) == 0) { movesRight = !movesRight; }           
+            if ((i % this.board.getBoardWidth()) == 0) { movesRight = !movesRight; }
 
             if (movesRight) {
-                this.add(tileVisual, i % 10, i / 10);
+                this.add(tileVisual, i % this.board.getBoardWidth(), i / this.board.getBoardWidth());
 
             } else {
-                this.add(tileVisual, 10 - ((i % 10) + 1), i / 10);
+                this.add(tileVisual, this.board.getBoardWidth() - ((i % this.board.getBoardWidth()) + 1), i / this.board.getBoardWidth());
 
             }
         }
