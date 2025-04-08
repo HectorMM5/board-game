@@ -1,8 +1,8 @@
 package boardgame.controller;
 
+import boardgame.model.boardFiles.BoardCollection;
 import java.io.File;
 import java.io.IOException;
-import boardgame.model.boardFiles.Board;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
