@@ -1,6 +1,4 @@
-package boardgame.controller;
-
-import boardgame.model.boardFiles.Board;
+package boardgame.model.boardFiles;
 
 import java.util.ArrayList;
 import java.util.List;
