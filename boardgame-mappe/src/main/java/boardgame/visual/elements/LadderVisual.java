@@ -3,42 +3,39 @@ package boardgame.visual.elements;
 import java.util.ArrayList;
 import java.util.stream.IntStream;
 
-import boardgame.model.effectFiles.LadderEffect;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class LadderVisual extends Group {
     
-    public LadderVisual(LadderEffect ladder) {
+    public LadderVisual(double length) {
+
         Rectangle leftPillar = new Rectangle();
-        leftPillar.setY(5);
-        leftPillar.setX(5);
+        leftPillar.setY(0);
+        leftPillar.setX(0);
         leftPillar.setWidth(10);
-        leftPillar.setHeight(100);
+        leftPillar.setHeight(length);
         leftPillar.setFill(Color.RED);
 
         Rectangle rightPillar = new Rectangle();
-        rightPillar.setY(5);
-        rightPillar.setX(35);
+        rightPillar.setY(0);
+        rightPillar.setX(40);
         rightPillar.setWidth(10);
-        rightPillar.setHeight(100);
-        rightPillar.setFill(Color.RED);
+        rightPillar.setHeight(length);
+        rightPillar.setFill(Color.GREEN);
 
-        int midpoint = 30;
-
-        int height = 100;
 
         ArrayList<Rectangle> steps = new ArrayList<>();
 
-        int stepAmount = height/25;
+        int stepAmount = (int) length/25;
 
         IntStream.rangeClosed(0, stepAmount - 2)
             .forEach(i -> {
                 Rectangle step = new Rectangle();
-                step.setX(15);
+                step.setX(10);
                 step.setY(25 + i*25);
-                step.setWidth(20);
+                step.setWidth(30);
                 step.setHeight(5);
                 step.setFill(Color.RED);
                 
@@ -49,10 +46,9 @@ public class LadderVisual extends Group {
         this.getChildren().addAll(steps);
         this.getChildren().addAll(rightPillar, leftPillar);
 
-
-
-
     }
+
+
 
     public Group getLadder() { return this; }
     

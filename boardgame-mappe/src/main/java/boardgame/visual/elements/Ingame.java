@@ -3,12 +3,15 @@ package boardgame.visual.elements;
 import java.util.ArrayList;
 
 import boardgame.controller.DiceButtonController;
+import boardgame.controller.LadderRotationController;
 import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Player;
-import boardgame.model.effectFiles.effectType;
+import boardgame.model.boardFiles.Tile;
+import boardgame.model.effectFiles.LadderEffect;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Ingame extends Application {
@@ -24,20 +27,48 @@ public class Ingame extends Application {
         DBController.setPlayerWhoseTurn(testPlayer);
         board.getTiles().get(0).setPlayer(testPlayer);
 
-        board.createMovementEffect(effectType.LADDER, 3);
+        board.getTiles().get(2).setEffect(new LadderEffect(board));
+
         
-        // Layout that will hold both board and button
+        StackPane centerPane = new StackPane();
+
+        centerPane.getChildren().add(boardVisual);
+
+        ArrayList<Tile> tilesWithLadders = new ArrayList<>();
+
+        for (Tile tile : board.getTiles()) {
+            if (tile.getEffect() instanceof LadderEffect) {
+                tilesWithLadders.add(tile);
+            }
+
+            if (tile.getEffect() != null) {
+                System.err.println("EFFECT IN: " + tile.getNumber());
+            }
+        }
+
+
+        LadderRotationController ladders = new LadderRotationController(boardVisual, tilesWithLadders);
+
+        centerPane.getChildren().add(ladders.getLadder());
+
+
         BorderPane root = new BorderPane();
-        root.setCenter(boardVisual);       // The game board in the center
+
+           
+        root.setCenter(centerPane);
+        
         root.setBottom(DBController.getButtonVisual());       // The roll dice button at the bottom
-        root.getChildren().addAll(new LadderVisual().getLadder());
 
         Scene scene = new Scene(root, 600, 600);
         primaryStage.setTitle("Board Game");
         primaryStage.setScene(scene);
         primaryStage.show();
 
+        
+
         boardVisual.updateEntireBoard();
+
+
 
     }
     
