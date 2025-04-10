@@ -1,9 +1,0 @@
-<changelist name="no_changes" date="1743080943720" recycled="false">
-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/no_changes/shelved.patch" />
-  <option name="DESCRIPTION" value="no changes" />
-  <binary>
-    <option name="BEFORE_PATH" value="target/classes/boardgame/visual/elements/ButtonVisual.class" />
-    <option name="AFTER_PATH" value="target/classes/boardgame/visual/elements/ButtonVisual.class" />
-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/no_changes/ButtonVisual.class" />
-  </binary>
-</changelist>
