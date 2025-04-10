@@ -5,22 +5,23 @@ import java.util.List;
 
 import boardgame.model.boardFiles.Tile;
 import boardgame.model.effectFiles.LadderEffect;
+import boardgame.model.effectFiles.SnakeEffect;
 import boardgame.visual.elements.BoardVisual;
 import boardgame.visual.elements.LadderVisual;
+import boardgame.visual.elements.SnakeVisual;
 import boardgame.visual.elements.TileVisual;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.transform.Rotate;
 
-public class LadderRotationController {
+public class LadderLayer {
 
-    private LadderVisual ladderVisual;
     private BoardVisual boardVisual;
 
     Pane ladderLayer = new Pane();
 
-    public LadderRotationController(BoardVisual boardVisual, List<Tile> tilesWithLadders) {
+    public LadderLayer(BoardVisual boardVisual, List<Tile> tilesWithLadders, List<Tile> tilesWithSnakes) {
         this.boardVisual = boardVisual;
 
         ladderLayer.setPickOnBounds(false);
@@ -33,9 +34,17 @@ public class LadderRotationController {
             renderLadder((LadderEffect) tile.getEffect());
         }
 
+        for (Tile tile : tilesWithSnakes) {
+            renderSnake((SnakeEffect) tile.getEffect());
+        }
+
+
+
     }
 
-    public void renderLadder(LadderEffect ladder) {
+    private void renderLadder(LadderEffect ladder) {
+
+        LadderVisual ladderVisual;
 
         Integer baseX = null;
         Integer baseY = null;
@@ -86,6 +95,63 @@ public class LadderRotationController {
         ladderVisual.getTransforms().add(new Rotate(-angle, 25, 0));
 
         ladderLayer.getChildren().add(ladderVisual);
+
+    }
+
+
+    private void renderSnake(SnakeEffect snake) {
+
+        SnakeVisual snakeVisual;
+
+        Integer baseX = null;
+        Integer baseY = null;
+
+        Integer targetX = null;
+        Integer targetY = null;
+
+        Iterator<Node> tileIterator = boardVisual.getChildren().iterator();
+
+        final int TILE_SIZE = 50;
+        final int GAP = 4;
+        final int spacing = TILE_SIZE + GAP;
+
+        while (((baseX == null) || (targetX == null)) && (tileIterator.hasNext())) {
+            Node tileNode = tileIterator.next();
+
+            if (tileNode instanceof TileVisual tileVisual) {
+                if (tileVisual.getTile().getNumber() == snake.getBaseTileIndex()) {
+
+                    baseX = BoardVisual.getColumnIndex(tileVisual);
+                    baseY = BoardVisual.getRowIndex(tileVisual);
+
+                } else if (tileVisual.getTile().getNumber() == snake.getTargetTileIndex()) {
+
+                    targetX = BoardVisual.getColumnIndex(tileVisual);
+                    targetY = BoardVisual.getRowIndex(tileVisual);
+
+                }
+            }
+        }
+
+        int dx = targetX - baseX;
+        int dy = targetY - baseY;
+
+        System.out.println("DX: " + dx);
+        System.out.println("DY: " + dy);
+
+        double hypotenuse = Math.sqrt((dx * dx) + (dy * dy));
+
+        snakeVisual = new SnakeVisual(hypotenuse * spacing - TILE_SIZE / 2);
+        snakeVisual.setLayoutX(baseX * spacing - TILE_SIZE / 2);
+        snakeVisual.setLayoutY(baseY * spacing - TILE_SIZE / 2);
+
+        double angle = Math.toDegrees(Math.atan2(dx, dy));
+
+        System.out.println(angle);
+
+        snakeVisual.getTransforms().add(new Rotate(-angle, 25, 0));
+
+        ladderLayer.getChildren().add(snakeVisual);
 
     }
 

@@ -3,11 +3,12 @@ package boardgame.visual.elements;
 import java.util.ArrayList;
 
 import boardgame.controller.DiceButtonController;
-import boardgame.controller.LadderRotationController;
+import boardgame.controller.LadderLayer;
 import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Player;
 import boardgame.model.boardFiles.Tile;
 import boardgame.model.effectFiles.LadderEffect;
+import boardgame.model.effectFiles.SnakeEffect;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -29,6 +30,8 @@ public class Ingame extends Application {
 
         board.getTiles().get(2).setEffect(new LadderEffect(board));
 
+        board.getTiles().get(85).setEffect(new SnakeEffect(board));
+
         
         StackPane centerPane = new StackPane();
 
@@ -39,6 +42,18 @@ public class Ingame extends Application {
         for (Tile tile : board.getTiles()) {
             if (tile.getEffect() instanceof LadderEffect) {
                 tilesWithLadders.add(tile);
+            }
+
+            if (tile.getEffect() != null) {
+                System.err.println("EFFECT IN: " + tile.getNumber());
+            }
+        }
+
+        ArrayList<Tile> tilesWithSnakes = new ArrayList<>();
+
+        for (Tile tile : board.getTiles()) {
+            if (tile.getEffect() instanceof SnakeEffect) {
+                tilesWithSnakes.add(tile);
             }
 
             if (tile.getEffect() != null) {
@@ -57,7 +72,7 @@ public class Ingame extends Application {
         primaryStage.show();
 
         
-        LadderRotationController ladders = new LadderRotationController(boardVisual, tilesWithLadders);
+        LadderLayer ladders = new LadderLayer(boardVisual, tilesWithLadders, tilesWithSnakes);
         centerPane.getChildren().add(ladders.getLadder());
         root.setCenter(centerPane);
 
