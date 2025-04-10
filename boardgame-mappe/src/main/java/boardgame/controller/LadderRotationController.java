@@ -70,50 +70,20 @@ public class LadderRotationController {
         int dx = targetX - baseX;
         int dy = targetY - baseY;
 
-        double hypotenuse = Math.sqrt(dx * dx + dy * dy);
+        System.out.println("DX: " + dx);
+        System.out.println("DY: " + dy);
+
+        double hypotenuse = Math.sqrt((dx * dx) + (dy * dy));
 
         ladderVisual = new LadderVisual(hypotenuse * spacing - TILE_SIZE / 2);
         ladderVisual.setLayoutX(baseX * spacing - TILE_SIZE / 2);
         ladderVisual.setLayoutY(baseY * spacing - TILE_SIZE / 2);
 
-        if (dy == 0) {
-            ladderVisual.getTransforms().add(new Rotate(
-                    270,
-                    25, // pivot X (relative to ladder's local space)
-                    0
-            ));
+        double angle = Math.toDegrees(Math.atan2(dx, dy));
 
-        } else if (dx != 0) {
-            double degree = Math.toDegrees(Math.atan(dy / dx));
+        System.out.println(angle);
 
-            System.out.println(degree);
-
-            if (dx > 0) {
-
-                // Set pivot for rotation to the bottom of the ladder
-                ladderVisual.getTransforms().add(new Rotate(
-                        270 + degree,
-                        25, // pivot X (relative to ladder's local space)
-                        0
-                ));
-
-                System.err.println("ENTER DX > 0");
-
-            } else {
-                // Set pivot for rotation to the bottom of the ladder
-                ladderVisual.getTransforms().add(new Rotate(
-                        degree,
-                        25, // pivot X (relative to ladder's local space)
-                        0
-                ));
-
-                System.out.println(degree);
-
-                System.err.println("ENTER DX < 0");
-
-            }
-
-        }
+        ladderVisual.getTransforms().add(new Rotate(-angle, 25, 0));
 
         ladderLayer.getChildren().add(ladderVisual);
 

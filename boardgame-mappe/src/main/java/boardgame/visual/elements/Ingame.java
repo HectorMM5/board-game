@@ -46,16 +46,8 @@ public class Ingame extends Application {
             }
         }
 
-
-        LadderRotationController ladders = new LadderRotationController(boardVisual, tilesWithLadders);
-
-        centerPane.getChildren().add(ladders.getLadder());
-
-
         BorderPane root = new BorderPane();
-
-           
-        root.setCenter(centerPane);
+        
         
         root.setBottom(DBController.getButtonVisual());       // The roll dice button at the bottom
 
@@ -65,6 +57,9 @@ public class Ingame extends Application {
         primaryStage.show();
 
         
+        LadderRotationController ladders = new LadderRotationController(boardVisual, tilesWithLadders);
+        centerPane.getChildren().add(ladders.getLadder());
+        root.setCenter(centerPane);
 
         boardVisual.updateEntireBoard();
 

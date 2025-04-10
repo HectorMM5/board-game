@@ -24,7 +24,7 @@ public class LadderEffect implements Effect {
 
         //MUST BE FIXED WHEN BASETILE RNG GIVES HIGH NUMBER. MAY NEED MULTIIPLE REROLLS TO GET WITHIN THE LOW %
         //eg. basetile = 97 has only 98, 99 and 100 as valid values, but rng runs from 1-100
-        targetTileIndex = board.randomGenerator.nextInt(baseTileIndex, 90);
+        targetTileIndex = board.randomGenerator.nextInt(baseTileIndex, 90) - 1;
 
         //Selected tiles may already have an effect; if so, reroll
         while (board.getTileInIndex(targetTileIndex).getEffect() != null) {
