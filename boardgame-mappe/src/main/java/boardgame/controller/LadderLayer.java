@@ -136,9 +136,6 @@ public class LadderLayer {
         int dx = targetX - baseX;
         int dy = targetY - baseY;
 
-        System.out.println("DX: " + dx);
-        System.out.println("DY: " + dy);
-
         double hypotenuse = Math.sqrt((dx * dx) + (dy * dy));
 
         snakeVisual = new SnakeVisual(hypotenuse * spacing - TILE_SIZE / 2);
@@ -146,8 +143,6 @@ public class LadderLayer {
         snakeVisual.setLayoutY(baseY * spacing - TILE_SIZE / 2);
 
         double angle = Math.toDegrees(Math.atan2(dx, dy));
-
-        System.out.println(angle);
 
         snakeVisual.getTransforms().add(new Rotate(-angle, 25, 0));
 

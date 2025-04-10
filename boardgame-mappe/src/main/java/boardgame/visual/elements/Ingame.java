@@ -34,7 +34,7 @@ public class Ingame extends Application {
 
         
         StackPane centerPane = new StackPane();
-    
+
         centerPane.getChildren().add(boardVisual);
 
         ArrayList<Tile> tilesWithLadders = new ArrayList<>();
@@ -45,7 +45,7 @@ public class Ingame extends Application {
             }
 
             if (tile.getEffect() != null) {
-                System.err.println("EFFECT IN: " + tile.getNumber());
+                System.out.println("EFFECT IN: " + tile.getNumber());
             }
         }
 
@@ -56,9 +56,6 @@ public class Ingame extends Application {
                 tilesWithSnakes.add(tile);
             }
 
-            if (tile.getEffect() != null) {
-                System.err.println("EFFECT IN: " + tile.getNumber());
-            }
         }
 
         BorderPane root = new BorderPane();
