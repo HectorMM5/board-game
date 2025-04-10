@@ -61,10 +61,11 @@ public class Board {
     //}
 
     public void movePlayer(Player player, int tileNumber) {
-        tiles.get(player.getPosition()).setPlayer(null);
+
+        tiles.get(player.getPosition() - 1).setPlayer(null);
 
         player.setPosition(tileNumber);
-        Tile targetTile = tiles.get(tileNumber);
+        Tile targetTile = tiles.get(tileNumber - 1);
         targetTile.setPlayer(player);
 
         if (!(targetTile.getEffect() == null)) {
@@ -74,7 +75,6 @@ public class Board {
 
     public void moveBy(Player player, int steps) {
         int nextPosition = player.getPosition() + steps;
-
         movePlayer(player, nextPosition);
 
     }

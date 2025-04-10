@@ -34,7 +34,7 @@ public class Ingame extends Application {
 
         
         StackPane centerPane = new StackPane();
-
+    
         centerPane.getChildren().add(boardVisual);
 
         ArrayList<Tile> tilesWithLadders = new ArrayList<>();

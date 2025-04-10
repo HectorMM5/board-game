@@ -31,7 +31,7 @@ public class Tile {
 
     public void setPlayer(Player recievedPlayer) {
         this.player = recievedPlayer;
-        if (effect != null) {
+        if (player != null && effect != null) {
             effect.execute(player);
         }
 

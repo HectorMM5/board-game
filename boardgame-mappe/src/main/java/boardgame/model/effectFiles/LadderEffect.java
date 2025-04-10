@@ -39,10 +39,7 @@ public class LadderEffect implements Effect {
 
     @Override
     public void execute(Player player) {
-        player.setPosition(targetTileIndex);
-        board.getTileInIndex(targetTileIndex).setPlayer(player);
-
-
+        board.movePlayer(player, targetTileIndex);
     }
 
     public int getBaseTileIndex() {
