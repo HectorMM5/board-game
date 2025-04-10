@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Update_at_24_03_2025_15_59_[Changes]1" date="1742828454263" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_03_2025_15_59_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 24/03/2025 15:59 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/boardgame/Logic/Functionality/effectType.class" />
+    <option name="AFTER_PATH" value="target/classes/boardgame/Logic/Functionality/effectType.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_03_2025_15_59_[Changes]1/effectType.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/boardgame/Logic/Entities/Tile.class" />
+    <option name="AFTER_PATH" value="target/classes/boardgame/Logic/Entities/Tile.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_03_2025_15_59_[Changes]1/Tile.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/boardgame/Logic/Entities/Player.class" />
+    <option name="AFTER_PATH" value="target/classes/boardgame/Logic/Entities/Player.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_03_2025_15_59_[Changes]1/Player.class" />
+  </binary>
+</changelist>

@@ -1,7 +1,17 @@
 package boardgame;
 
-public class Main {
+import boardgame.visual.elements.GameInterface;
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+    @Override
+    public void start(Stage primaryStage){
+        GameInterface ui = new GameInterface(primaryStage);
+        ui.init();
+        ui.start();
+    }
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        launch(args);
     }
 }
