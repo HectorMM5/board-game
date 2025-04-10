@@ -24,11 +24,10 @@ public class LadderLayer {
     public LadderLayer(BoardVisual boardVisual, List<Tile> tilesWithLadders, List<Tile> tilesWithSnakes) {
         this.boardVisual = boardVisual;
 
-        ladderLayer.setPickOnBounds(false);
-
         ladderLayer.setPrefSize(536, 482); // same as board
         ladderLayer.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         ladderLayer.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        //ladderLayer.setStyle("-fx-border-color: yellow; -fx-border-width: 2;");
 
         for (Tile tile : tilesWithLadders) {
             renderLadder((LadderEffect) tile.getEffect());
@@ -79,14 +78,11 @@ public class LadderLayer {
         int dx = targetX - baseX;
         int dy = targetY - baseY;
 
-        System.out.println("DX: " + dx);
-        System.out.println("DY: " + dy);
-
         double hypotenuse = Math.sqrt((dx * dx) + (dy * dy));
 
         ladderVisual = new LadderVisual(hypotenuse * spacing - TILE_SIZE / 2);
-        ladderVisual.setLayoutX(baseX * spacing - TILE_SIZE / 2);
-        ladderVisual.setLayoutY(baseY * spacing - TILE_SIZE / 2);
+        ladderVisual.setLayoutX(baseX * spacing);
+        ladderVisual.setLayoutY(baseY * spacing + TILE_SIZE / 2.0);
 
         double angle = Math.toDegrees(Math.atan2(dx, dy));
 
@@ -139,8 +135,8 @@ public class LadderLayer {
         double hypotenuse = Math.sqrt((dx * dx) + (dy * dy));
 
         snakeVisual = new SnakeVisual(hypotenuse * spacing - TILE_SIZE / 2);
-        snakeVisual.setLayoutX(baseX * spacing - TILE_SIZE / 2);
-        snakeVisual.setLayoutY(baseY * spacing - TILE_SIZE / 2);
+        snakeVisual.setLayoutX(baseX * spacing);
+        snakeVisual.setLayoutY(baseY * spacing + TILE_SIZE / 2.0);
 
         double angle = Math.toDegrees(Math.atan2(dx, dy));
 

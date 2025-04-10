@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Tile;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 
 public class BoardVisual extends GridPane {
     private final Board board;
@@ -15,7 +16,11 @@ public class BoardVisual extends GridPane {
         this.board = board;
         this.tileLogic = board.getTiles();
         this.tileViews = new ArrayList<>();
-        
+
+        this.setPrefSize(536, 482); // same as board
+        this.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        this.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+
         initializeBoard();
     }
 
