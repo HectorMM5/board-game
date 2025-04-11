@@ -19,6 +19,7 @@ public class GameController {
     private Player playerWhoseTurn;
     private final LoopingIterator<Player> playerIterator;
     private final ButtonVisual diceButton = new ButtonVisual(() -> handleRollDice());
+    private Player playerToSkip = null;
 
     public GameController(Board board, BoardVisual boardVisual, List<Player> players) {
         this.board = board;
@@ -33,11 +34,11 @@ public class GameController {
 
     public void movePlayer(Player player, int tileNumber) {
 
-        tiles.get(player.getPosition() - 1).setPlayer(null);
+        tiles.get(player.getPosition() - 1).popPlayer();
 
         player.setPosition(tileNumber);
         Tile targetTile = tiles.get(tileNumber - 1);
-        targetTile.setPlayer(player);
+        targetTile.addPlayer(player);
 
         if (!(targetTile.getEffect() == null)) {
             targetTile.getEffect().execute(player);
@@ -53,9 +54,13 @@ public class GameController {
     }
 
     public void handleRollDice() {
-        moveBy(playerWhoseTurn, dice.roll());
+        moveBy(playerWhoseTurn, dice.roll()); 
         advanceTurn();
         
+    }
+
+    public void markPlayerToSkip(Player player) {
+        playerToSkip = player;
     }
 
     public Player getCurrentPlayer() {
@@ -64,6 +69,12 @@ public class GameController {
     
     public void advanceTurn() {
         playerWhoseTurn = playerIterator.next();
+
+        if (playerToSkip != null && playerToSkip.equals(playerWhoseTurn)) {
+            playerToSkip = null;
+            playerWhoseTurn = playerIterator.next();
+
+        }
     }
 
     public HBox getDiceButton() {
