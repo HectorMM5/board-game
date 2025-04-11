@@ -26,7 +26,7 @@ public class Ingame {
         ArrayList<Player> gamePlayers = new ArrayList<>(playerList);
         
         for (Player player : gamePlayers) {
-            board.getTiles().get(0).setPlayer(player);
+            board.getTiles().get(0).addPlayer(player);
         }
     
         gameController = new GameController(board, boardVisual, gamePlayers);
