@@ -1,5 +1,6 @@
 package boardgame.model.effectFiles;
 
+import boardgame.controller.GameController;
 import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Player;
 import boardgame.model.boardFiles.Tile;
@@ -9,11 +10,14 @@ public class SnakeEffect implements Effect {
     private int baseTileIndex;
     private int targetTileIndex;
     private Board board;
+    private GameController gameController;
 
-    public SnakeEffect(Board board) {
+    public SnakeEffect(Board board, GameController gameController) {
+        this.board = board;
+        this.gameController = gameController;
         this.baseTileIndex = -1;
         this.targetTileIndex = -1;
-        this.board = board;
+
     }
 
     @Override
@@ -38,7 +42,7 @@ public class SnakeEffect implements Effect {
 
     @Override
     public void execute(Player player) {
-        board.movePlayer(player, targetTileIndex);
+        gameController.movePlayer(player, targetTileIndex);
     }
 
     public int getBaseTileIndex() {

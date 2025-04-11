@@ -1,8 +1,9 @@
 package boardgame.visual.elements;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import boardgame.controller.DiceButtonController;
+import boardgame.controller.GameController;
 import boardgame.controller.LadderLayer;
 import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Player;
@@ -17,20 +18,27 @@ import javafx.stage.Stage;
 
 public class Ingame extends Application {
     private final Board board = new Board();
-    private final ArrayList<Player> players = new ArrayList<>();
-    BoardVisual boardVisual = new BoardVisual(board);
-    DiceButtonController DBController = new DiceButtonController(board, boardVisual, null);
+    private final BoardVisual boardVisual = new BoardVisual(board);
+    GameController gameController;
 
     @Override
     public void start(Stage primaryStage) { 
         
-        Player testPlayer = new Player("/PlayerIcons/xd.png", "VIKTOOOR");
-        DBController.setPlayerWhoseTurn(testPlayer);
-        board.getTiles().get(0).setPlayer(testPlayer);
+        Player testPlayer1 = new Player("/PlayerIcons/solbriller.png", "VIKTOOOR");
+        Player testPlayer2 = new Player("/PlayerIcons/xd.png", "VIKTOOOR");
 
-        board.getTiles().get(2).setEffect(new LadderEffect(board));
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(testPlayer1);
+        playerList.add(testPlayer2);
 
-        board.getTiles().get(85).setEffect(new SnakeEffect(board));
+        gameController = new GameController(board, boardVisual, playerList);
+
+        board.getTiles().get(0).setPlayer(testPlayer1);
+        board.getTiles().get(0).setPlayer(testPlayer2);
+
+        board.getTiles().get(2).setEffect(new LadderEffect(board, gameController));
+
+        board.getTiles().get(85).setEffect(new SnakeEffect(board, gameController));
 
         
         StackPane centerPane = new StackPane();
@@ -61,7 +69,7 @@ public class Ingame extends Application {
         BorderPane root = new BorderPane();
         
         
-        root.setBottom(DBController.getButtonVisual());       // The roll dice button at the bottom
+        root.setBottom(gameController.getDiceButton());       // The roll dice button at the bottom
 
         Scene scene = new Scene(root, 600, 600);
         primaryStage.setTitle("Board Game");
