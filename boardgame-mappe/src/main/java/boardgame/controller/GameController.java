@@ -33,11 +33,11 @@ public class GameController {
 
     public void movePlayer(Player player, int tileNumber) {
 
-        tiles.get(player.getPosition() - 1).setPlayer(null);
+        tiles.get(player.getPosition() - 1).popPlayer();
 
         player.setPosition(tileNumber);
         Tile targetTile = tiles.get(tileNumber - 1);
-        targetTile.setPlayer(player);
+        targetTile.addPlayer(player);
 
         if (!(targetTile.getEffect() == null)) {
             targetTile.getEffect().execute(player);
