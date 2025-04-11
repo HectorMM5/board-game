@@ -28,6 +28,7 @@ public class Board {
             .forEach(i -> tiles.add(new Tile(i)));
 
     }
+
     public Board(int boardWidth, int boardHeight) {
         this.randomGenerator = new Random();
         this.tiles = new ArrayList<>();
@@ -53,32 +54,6 @@ public class Board {
     public HashMap<Tile, Effect> getEffectMap() {
         return effectMap;
     }
-
-    
-
-    //public static Rules getRules() {
-    //    return rules;
-    //}
-
-    public void movePlayer(Player player, int tileNumber) {
-
-        tiles.get(player.getPosition() - 1).setPlayer(null);
-
-        player.setPosition(tileNumber);
-        Tile targetTile = tiles.get(tileNumber - 1);
-        targetTile.setPlayer(player);
-
-        if (!(targetTile.getEffect() == null)) {
-            targetTile.getEffect().execute(player);
-        }
-    }
-
-    public void moveBy(Player player, int steps) {
-        int nextPosition = player.getPosition() + steps;
-        movePlayer(player, nextPosition);
-
-    }
-
 
     public int getTileCount() {
         return tileCount;
