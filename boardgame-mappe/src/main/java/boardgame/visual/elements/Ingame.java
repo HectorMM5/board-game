@@ -9,6 +9,7 @@ import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Player;
 import boardgame.model.boardFiles.Tile;
 import boardgame.model.effectFiles.LadderEffect;
+import boardgame.model.effectFiles.SkipTurnEffect;
 import boardgame.model.effectFiles.SnakeEffect;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -37,7 +38,7 @@ public class Ingame extends Application {
         board.getTiles().get(0).addPlayer(testPlayer2);
 
         board.getTiles().get(2).setEffect(new LadderEffect(board, gameController));
-
+        board.getTiles().get(30).setEffect(new SkipTurnEffect(gameController));
         board.getTiles().get(85).setEffect(new SnakeEffect(board, gameController));
 
         
