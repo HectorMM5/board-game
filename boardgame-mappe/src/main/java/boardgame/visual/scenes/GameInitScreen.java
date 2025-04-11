@@ -1,13 +1,13 @@
 package boardgame.visual.scenes;
 
 import boardgame.controller.PlayerCSV;
+import boardgame.model.boardFiles.Player;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -16,14 +16,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class GameInitScreen {
     public Stage primaryStage;
-    List<String> imagePaths = new ArrayList<>();
+    private final String ICON_RELATIVE_PATH = "/PlayerIcons/";
+    List<String> iconFileNames = new ArrayList<>();
     List<Button> playerButtons = new ArrayList<>();
     List<HBox> playerFieldWrappers = new ArrayList<>();
     List<Button> saveButtons = new ArrayList<>();
@@ -64,7 +64,6 @@ public class GameInitScreen {
         addPlayerBtnWrapper.setAlignment(Pos.CENTER);
         menuWrapper.getChildren().add(addPlayerBtnWrapper);
 
-
         playerWrapper = new VBox();
         playerWrapper.setSpacing(10);
         addPlayer();
@@ -74,10 +73,8 @@ public class GameInitScreen {
             }
         });
 
-
         VBox.setMargin(playerWrapper, new Insets(0,0,50,0));
         menuWrapper.getChildren().add(playerWrapper);
-
 
         Button startGameBtn = new Button("Start game!");
         startGameBtn.setStyle(buttonStyle);
@@ -86,14 +83,13 @@ public class GameInitScreen {
         startButtonWrapper.getChildren().add(startGameBtn);
         menuWrapper.getChildren().add(startButtonWrapper);
 
-
         startGameBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 GameInitScreen.this.startGame(startGameBtn);
             }
         });
 
-        Scene menu = new Scene(menuWrapper);
+        Scene menu = new Scene(menuWrapper, 600, 600);
         primaryStage.setScene(menu);
     }
 
@@ -113,14 +109,14 @@ public class GameInitScreen {
 
         playerIconIndexes.add(0);
 
-        ImageView buttonIMG = new ImageView(new Image(imagePaths.get(0)));
+        Image iconImage = getImageFromFileName(iconFileNames.get(0));
+        ImageView buttonIMG = new ImageView(iconImage);
         buttonIMG.setFitHeight(40);
         buttonIMG.setFitWidth(40);
         playerButton.setGraphic(buttonIMG);
 
         Button saveButton = new Button("Save new");
         saveButtons.add(saveButton);
-
 
         HBox playerFieldWrapper = new HBox(10); // 10px spacing
         playerFieldWrapper.getChildren().addAll(playerButton, playerDropdown, saveButton);
@@ -133,7 +129,7 @@ public class GameInitScreen {
         playerButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 int currentIndex = playerIconIndexes.get(finalIndex);
-                if (currentIndex < imagePaths.size() - 1) {
+                if (currentIndex < iconFileNames.size() - 1) {
                     currentIndex++;
                 } else {
                     currentIndex = 0;
@@ -141,7 +137,8 @@ public class GameInitScreen {
 
                 playerIconIndexes.set(finalIndex, currentIndex);
 
-                ImageView buttonIMG = new ImageView(new Image(imagePaths.get(currentIndex)));
+                Image iconImage = getImageFromFileName(iconFileNames.get(currentIndex));
+                ImageView buttonIMG = new ImageView(iconImage);
                 buttonIMG.setFitHeight(40);
                 buttonIMG.setFitWidth(40);
                 playerButton.setGraphic(buttonIMG);
@@ -153,12 +150,11 @@ public class GameInitScreen {
             public void handle(ActionEvent event) {
                 String selectedPlayer = playerDropdown.getValue();
                 if (Arrays.stream(playerNames).anyMatch(selectedPlayer::equals)) {
-                    String iconPath = playerCSV.getPlayerIconByPlayerName(selectedPlayer);
-                    File iconFile = new File(iconPath);
+                    String relativeIconPath = playerCSV.getPlayerIconByPlayerName(selectedPlayer);
+                    
+                    String fileName = new File(relativeIconPath).getName();
 
-                    String iconURI = iconFile.toURI().toString();
-
-                    int iconIndex = imagePaths.indexOf(iconURI);
+                    int iconIndex = iconFileNames.indexOf(fileName);
                     if (iconIndex == -1) {
                         System.out.println("Icon not found in loaded images");
                         return;
@@ -166,7 +162,8 @@ public class GameInitScreen {
 
                     playerIconIndexes.set(finalIndex, iconIndex);
 
-                    ImageView buttonIMG = new ImageView(new Image(iconURI));
+                    Image iconImage = getImageFromFileName(fileName);
+                    ImageView buttonIMG = new ImageView(iconImage);
                     buttonIMG.setFitHeight(40);
                     buttonIMG.setFitWidth(40);
                     playerButtons.get(finalIndex).setGraphic(buttonIMG);
@@ -184,10 +181,9 @@ public class GameInitScreen {
                 }
 
                 int selectedIconIndex = playerIconIndexes.get(finalIndex);
-                String selectedIconPath = imagePaths.get(selectedIconIndex);
-
-                File selectedIconFile = new File(selectedIconPath.replace("file:/", ""));
-                String relativeIconPath = "src/main/resources/PlayerIcons/" + selectedIconFile.getName();
+                String iconFileName = iconFileNames.get(selectedIconIndex);
+                
+                String relativeIconPath = ICON_RELATIVE_PATH + iconFileName;
 
                 String[] playerNames = playerCSV.getPlayerNames();
                 if (Arrays.stream(playerNames).anyMatch(playerName::equals)) {
@@ -211,16 +207,51 @@ public class GameInitScreen {
     }
 
     private void loadImages() {
-        String path = "src/main/resources/PlayerIcons/";
-        imagePaths = new ArrayList<>();
-        File dir = new File(path);
+        iconFileNames = new ArrayList<>();
+        String directoryPath = "src/main/resources/PlayerIcons/";
+        File dir = new File(directoryPath);
+        
         if (dir.isDirectory()) {
             for (File file : dir.listFiles()) {
-                imagePaths.add(file.toURI().toString());
+                iconFileNames.add(file.getName());
             }
-        }
-        else{
-            System.out.println("Not a directory");
+        } else {
+            System.out.println("Not a directory: " + directoryPath);
         }
     }
+    
+
+    private Image getImageFromFileName(String fileName) {
+        String resourcePath = ICON_RELATIVE_PATH + fileName;
+        return new Image(getClass().getResourceAsStream(resourcePath));
+    }
+
+    public ArrayList<Player> getCurrentPlayers() {
+    ArrayList<Player> playerList = new ArrayList<>();
+
+    for (int i = 0; i < playerDropdowns.size(); i++) {
+        ComboBox<String> dropdown = playerDropdowns.get(i);
+        String playerName = dropdown.getValue();
+
+        if (playerName != null && !playerName.trim().isEmpty()) {
+            String relativeIconPath = playerCSV.getPlayerIconByPlayerName(playerName);
+            
+            if (!relativeIconPath.startsWith(ICON_RELATIVE_PATH)) {
+                String iconFileName = new File(relativeIconPath).getName();
+                relativeIconPath = ICON_RELATIVE_PATH + iconFileName;
+            }
+            
+            Player player = new Player(relativeIconPath, playerName);
+            playerList.add(player);
+        }
+    }
+
+    if (playerList.isEmpty()) {
+        System.out.println("No valid players selected");
+    }
+    for (Player player : playerList) {
+        System.out.println("Player: " + player.getName() + ", Icon: " + player.getIcon());
+    }
+    return playerList;
+}
 }
