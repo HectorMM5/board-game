@@ -1,17 +1,20 @@
 package boardgame.model.boardFiles;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import boardgame.model.effectFiles.Effect;
 
 public class Tile {
     
-    private Player player;
+    private List<Player> players;
     private Effect effect;
     private final int number;
 
     public Tile(int number) {
         this.number = number;
         this.effect = null;
-        this.player = null;
+        this.players = new ArrayList<>();
 
     }
 
@@ -23,18 +26,21 @@ public class Tile {
         return effect;
     }
 
-    public Player getPlayer() {
-        return player;
+    public List<Player> getPlayers() {
+        return players;
     }
 
 
-
-    public void setPlayer(Player recievedPlayer) {
-        this.player = recievedPlayer;
-        if (player != null && effect != null) {
-            effect.execute(player);
+    public void addPlayer(Player recievedPlayer) {
+        players.add(recievedPlayer);
+        if (recievedPlayer != null && effect != null) {
+            effect.execute(recievedPlayer);
         }
 
+    }
+
+    public void popPlayer() {
+        players.remove(0);
     }
 
     public void setEffect(Effect effect) {

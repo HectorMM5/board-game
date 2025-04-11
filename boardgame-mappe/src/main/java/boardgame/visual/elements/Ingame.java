@@ -33,8 +33,8 @@ public class Ingame extends Application {
 
         gameController = new GameController(board, boardVisual, playerList);
 
-        board.getTiles().get(0).setPlayer(testPlayer1);
-        board.getTiles().get(0).setPlayer(testPlayer2);
+        board.getTiles().get(0).addPlayer(testPlayer1);
+        board.getTiles().get(0).addPlayer(testPlayer2);
 
         board.getTiles().get(2).setEffect(new LadderEffect(board, gameController));
 
