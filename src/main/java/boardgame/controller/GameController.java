@@ -33,6 +33,13 @@ public class GameController {
 
     }
 
+    public void start() {    
+        for (Player player : players) {
+            board.getTiles().get(0).addPlayer(player);
+        }
+
+    }
+
     public void movePlayer(Player player, int tileNumber) {
 
         tiles.get(player.getPosition() - 1).popPlayer();
