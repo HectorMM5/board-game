@@ -5,35 +5,29 @@ import java.util.ArrayList;
 import boardgame.controller.GameController;
 import boardgame.controller.LadderLayer;
 import boardgame.model.boardFiles.Board;
-import boardgame.model.boardFiles.Player;
 import boardgame.model.boardFiles.Tile;
 import boardgame.model.effectFiles.LadderEffect;
-import boardgame.model.effectFiles.SkipTurnEffect;
 import boardgame.model.effectFiles.SnakeEffect;
+import boardgame.utils.GameSetup;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Ingame {
-    private final Board board = new Board();
-    private final BoardVisual boardVisual = new BoardVisual(board);
+    private final Board board;
+    private final BoardVisual boardVisual;
     GameController gameController;
+
+    public Ingame(GameSetup gameSetup) {
+        board = gameSetup.getBoard();
+        boardVisual = gameSetup.getBoardVisual();
+        gameController = gameSetup.getGameController();
+
+    }
     
 
-    public void start(Stage primaryStage, ArrayList<Player> playerList) { 
-        ArrayList<Player> gamePlayers = new ArrayList<>(playerList);
-        
-        for (Player player : gamePlayers) {
-            board.getTiles().get(0).addPlayer(player);
-        }
-    
-        gameController = new GameController(board, boardVisual, gamePlayers);
-    
-        board.getTiles().get(2).setEffect(new LadderEffect(board, gameController));
-        board.getTiles().get(30).setEffect(new SkipTurnEffect(gameController));
-        board.getTiles().get(85).setEffect(new SnakeEffect(board, gameController));
-        
+    public void createGameScene(Stage primaryStage) { 
         StackPane centerPane = new StackPane();
         centerPane.getChildren().add(boardVisual);
     
@@ -66,6 +60,8 @@ public class Ingame {
         LadderLayer ladders = new LadderLayer(boardVisual, tilesWithLadders, tilesWithSnakes);
         centerPane.getChildren().add(ladders.getLadder());
         root.setCenter(centerPane);
+
+        gameController.start();
     
         boardVisual.updateEntireBoard();
     }

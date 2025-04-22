@@ -1,4 +1,4 @@
-package boardgame.controller;
+package boardgame.utils;
 
 import java.util.Iterator;
 import java.util.List;

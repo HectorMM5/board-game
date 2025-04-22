@@ -5,6 +5,7 @@ import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Player;
 import boardgame.model.boardFiles.Tile;
 import boardgame.model.diceFiles.Dice;
+import boardgame.utils.LoopingIterator;
 import boardgame.visual.elements.BoardVisual;
 import boardgame.visual.elements.ButtonVisual;
 import javafx.scene.layout.HBox;
@@ -32,6 +33,13 @@ public class GameController {
 
     }
 
+    public void start() {    
+        for (Player player : players) {
+            board.getTiles().get(0).addPlayer(player);
+        }
+
+    }
+
     public void movePlayer(Player player, int tileNumber) {
 
         tiles.get(player.getPosition() - 1).popPlayer();
@@ -41,7 +49,7 @@ public class GameController {
         targetTile.addPlayer(player);
 
         if (!(targetTile.getEffect() == null)) {
-            targetTile.getEffect().execute(player);
+            targetTile.getEffect().execute(player, this);
         }
 
         boardVisual.updateEntireBoard();
