@@ -45,7 +45,6 @@ public class Tile {
 
     public void setEffect(Effect effect) {
         this.effect = effect;
-        effect.setup(this);
         
     }
 
