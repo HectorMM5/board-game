@@ -19,7 +19,6 @@ public class Board {
         this.randomGenerator = new Random();
         this.tiles = new ArrayList<>();
         this.effectMap = new HashMap<>();
-
         this.boardWidth = 10;
         this.boardHeight = 9;
         this.tileCount = boardWidth * boardHeight;
@@ -64,8 +63,6 @@ public class Board {
     public int getBoardHeight() {
         return boardHeight;
     }
-
-   
 
 
 }
