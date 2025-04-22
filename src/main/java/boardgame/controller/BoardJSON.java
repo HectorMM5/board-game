@@ -1,8 +1,8 @@
 package boardgame.controller;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.stream.IntStream;
 
 import org.json.JSONArray;
@@ -18,20 +18,26 @@ import boardgame.model.effectFiles.SnakeEffect;
 
 public class BoardJSON {
 
-    GameController gameController;
     public static Board constructSnLBoardFromJSON(int choice, GameController gameController) {
         Board board = new Board();
 
-        try {
-            String jsonText = Files.readString(Paths.get("boards.json"));
-            JSONObject SnLBoard = new JSONObject(jsonText).getJSONArray("games").getJSONObject(0).getJSONArray("SnL").getJSONObject(choice);
+        try (InputStream is = BoardJSON.class.getClassLoader().getResourceAsStream("boards.json")) {
+            if (is == null) {
+                throw new IOException("boards.json not found in resources!");
+            }
 
-            JSONArray tilesWithEffects = SnLBoard.getJSONArray("tiles"); 
+            String jsonText = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+            JSONObject SnLBoard = new JSONObject(jsonText)
+                .getJSONArray("games")
+                .getJSONObject(0)
+                .getJSONArray("SnL")
+                .getJSONObject(choice);
 
-            IntStream.rangeClosed(0, tilesWithEffects.length() - 1)
-            .forEach(i -> modifyEffectTileFromJSON(tilesWithEffects.getJSONObject(i), board, gameController));
+            JSONArray tilesWithEffects = SnLBoard.getJSONArray("tiles");
 
-            
+            IntStream.range(0, tilesWithEffects.length())
+                .forEach(i -> modifyEffectTileFromJSON(tilesWithEffects.getJSONObject(i), board, gameController));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,40 +48,35 @@ public class BoardJSON {
     public static void modifyEffectTileFromJSON(JSONObject tileWithEffect, Board board, GameController gameController) {
         int tileNumber = tileWithEffect.getInt("tile");
         String effectType = tileWithEffect.getString("effect");
-        
+
         Effect effect;
         int target;
+
         switch (effectType) {
             case "Ladder":
                 target = tileWithEffect.getInt("target");
-                board.getTiles().get(tileNumber - 1).setEffect(new PlaceholderEffect());
-
-                effect = new LadderEffect(gameController, tileNumber, target);
-
+                board.getTiles().get(target - 1).setEffect(new PlaceholderEffect());
+                effect = new LadderEffect(tileNumber, target);
                 break;
 
             case "Snake":
                 target = tileWithEffect.getInt("target");
-                board.getTiles().get(tileNumber - 1).setEffect(new PlaceholderEffect());
-
-                effect = new SnakeEffect(gameController, tileNumber, target);
-
+                board.getTiles().get(target - 1).setEffect(new PlaceholderEffect());
+                effect = new SnakeEffect(tileNumber, target);
                 break;
 
             case "LoseTurn":
-                effect = new SkipTurnEffect(gameController);
+                effect = new SkipTurnEffect();
                 break;
 
             case "Back":
-                effect = new BackToStartEffect(gameController);
+                effect = new BackToStartEffect();
                 break;
 
             default:
-                throw new AssertionError();
+                throw new AssertionError("Unknown effect type: " + effectType);
         }
 
         board.getTiles().get(tileNumber - 1).setEffect(effect);
-
     }
-
 }
