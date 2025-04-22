@@ -33,9 +33,6 @@ public class Tile {
 
     public void addPlayer(Player recievedPlayer) {
         players.add(recievedPlayer);
-        if (recievedPlayer != null && effect != null) {
-            effect.execute(recievedPlayer);
-        }
 
     }
 
