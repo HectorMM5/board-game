@@ -5,6 +5,7 @@ import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Player;
 import boardgame.model.boardFiles.Tile;
 import boardgame.model.diceFiles.Dice;
+import boardgame.utils.LoopingIterator;
 import boardgame.visual.elements.BoardVisual;
 import boardgame.visual.elements.ButtonVisual;
 import javafx.scene.layout.HBox;
