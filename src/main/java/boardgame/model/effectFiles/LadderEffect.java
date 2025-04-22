@@ -12,14 +12,14 @@ public class LadderEffect implements Effect {
     private Board board;
     private GameController gameController;
 
-    public LadderEffect(GameController gameController, int baseTileIndex, int targetTileIndex) {
+    public LadderEffect(int baseTileIndex, int targetTileIndex) {
         this.baseTileIndex = baseTileIndex;
         this.targetTileIndex = targetTileIndex;
 
     }
 
     @Override
-    public void execute(Player player) {
+    public void execute(Player player, GameController gameController) {
         gameController.movePlayer(player, targetTileIndex);
     }
 

@@ -9,15 +9,14 @@ public class SnakeEffect implements Effect {
     private int targetTileIndex;
     private GameController gameController;
 
-    public SnakeEffect(GameController gameController, int baseTileIndex, int targetTileIndex) {
-        this.gameController = gameController;
+    public SnakeEffect(int baseTileIndex, int targetTileIndex) {
         this.baseTileIndex = baseTileIndex;
         this.targetTileIndex = targetTileIndex;
 
     }
 
     @Override
-    public void execute(Player player) {
+    public void execute(Player player, GameController gameController) {
         gameController.movePlayer(player, targetTileIndex);
     }
 

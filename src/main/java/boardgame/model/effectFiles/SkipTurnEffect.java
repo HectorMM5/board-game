@@ -10,14 +10,8 @@ import boardgame.model.boardFiles.Player;
  */
 public class SkipTurnEffect implements Effect {
 
-    private final GameController gameController;
-
-    public SkipTurnEffect(GameController gameController) {
-        this.gameController = gameController;
-    }
-
     @Override
-    public void execute(Player player) {
+    public void execute(Player player, GameController gameController) {
         gameController.markPlayerToSkip(player);
     }
 }

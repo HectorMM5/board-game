@@ -49,7 +49,7 @@ public class GameController {
         targetTile.addPlayer(player);
 
         if (!(targetTile.getEffect() == null)) {
-            targetTile.getEffect().execute(player);
+            targetTile.getEffect().execute(player, this);
         }
 
         boardVisual.updateEntireBoard();
