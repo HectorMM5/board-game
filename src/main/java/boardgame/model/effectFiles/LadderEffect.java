@@ -4,7 +4,6 @@ package boardgame.model.effectFiles;
 import boardgame.controller.GameController;
 import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Player;
-import boardgame.model.boardFiles.Tile;
 
 public class LadderEffect implements Effect {
 
@@ -13,29 +12,10 @@ public class LadderEffect implements Effect {
     private Board board;
     private GameController gameController;
 
-    public LadderEffect(Board board, GameController gameController) {
-        this.board = board;
-        this.gameController = gameController;
-        this.baseTileIndex = -1;
-        this.targetTileIndex = -1;
+    public LadderEffect(GameController gameController, int baseTileIndex, int targetTileIndex) {
+        this.baseTileIndex = baseTileIndex;
+        this.targetTileIndex = targetTileIndex;
 
-    }
-
-    @Override
-    public LadderEffect setup(Tile tile) {
-        //Target tile is randomly selected
-        baseTileIndex = tile.getNumber();
-        targetTileIndex = board.randomGenerator.nextInt(baseTileIndex, 90);
-
-        //Selected tiles may already have an effect; if so, reroll
-        while (board.getTileInIndex(targetTileIndex).getEffect() != null) {
-            targetTileIndex = board.randomGenerator.nextInt(baseTileIndex, 90);
-        }
-
-        board.getTileInIndex(targetTileIndex - 1).setEffect(new PlaceholderEffect());
-        
-        return this;
-        
     }
 
     @Override
@@ -49,6 +29,14 @@ public class LadderEffect implements Effect {
 
     public int getTargetTileIndex() {
         return targetTileIndex;
+    }
+
+    public void setBaseTileIndex(int newBaseTileIndex) {
+        baseTileIndex = newBaseTileIndex;
+    }
+
+    public void setTargetTileIndex(int newTargetTileIndex) {
+        baseTileIndex = newTargetTileIndex;
     }
 
     
