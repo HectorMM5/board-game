@@ -21,5 +21,6 @@ public class BoardCollection {
     public void addBoard(Board board) {
         this.boards.add(board);
     }
-}
 
+    
+}
