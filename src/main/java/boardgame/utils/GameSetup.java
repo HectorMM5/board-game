@@ -13,11 +13,11 @@ import javafx.scene.layout.VBox;
 
 public class GameSetup {
 
-    private Board board;
-    private BoardVisual boardVisual;
+    private final Board board;
+    private final BoardVisual boardVisual;
     private GameController gameController;
-    private SideColumnVisual sideColumnVisual;
-    private VisualController visualController;
+    private final SideColumnVisual sideColumnVisual;
+    private final VisualController visualController;
 
     public GameSetup(String game, int boardChoice, List<Player> players) {
         board = BoardJSON.constructSnLBoardFromJSON(boardChoice, gameController); // OK if gameController is unused here

@@ -1,4 +1,4 @@
-package boardgame.visual.elements;
+package boardgame.visual.scenes;
 
 import java.util.ArrayList;
 
@@ -9,6 +9,8 @@ import boardgame.model.boardFiles.Tile;
 import boardgame.model.effectFiles.LadderEffect;
 import boardgame.model.effectFiles.SnakeEffect;
 import boardgame.utils.GameSetup;
+import boardgame.visual.elements.BoardVisual;
+import boardgame.visual.elements.LadderLayer;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -65,7 +67,7 @@ public class Ingame {
         primaryStage.show();
     
         LadderLayer ladders = new LadderLayer(boardVisual, tilesWithLadders, tilesWithSnakes);
-        centerPane.getChildren().add(ladders.getLadder());
+        centerPane.getChildren().add(ladders);
         root.setCenter(centerPane);
 
         gameController.start();

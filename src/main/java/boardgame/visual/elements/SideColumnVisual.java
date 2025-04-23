@@ -24,7 +24,7 @@ public class SideColumnVisual extends VBox {
         this.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
 
         BorderPane diceWrapper = new BorderPane();
-        diceWrapper.setCenter(diceAnimation.getDiceBase());
+        diceWrapper.setCenter(diceAnimation);
         diceWrapper.setMaxWidth(Double.MAX_VALUE);
         diceWrapper.setPrefWidth(500);
 

@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 import boardgame.model.boardFiles.Player;
 import boardgame.utils.GameSetup;
-import boardgame.visual.elements.Ingame;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 

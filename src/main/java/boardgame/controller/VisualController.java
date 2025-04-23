@@ -27,7 +27,7 @@ public class VisualController {
     }
 
     public HBox getDiceButton() {
-        return diceButton.getPane();
+        return diceButton;
     }
 
     public DiceAnimation getDiceAnimation() {
