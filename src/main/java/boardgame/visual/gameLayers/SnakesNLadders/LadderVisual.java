@@ -1,4 +1,4 @@
-package boardgame.visual.elements;
+package boardgame.visual.gameLayers.SnakesNLadders;
 
 import java.util.ArrayList;
 import java.util.stream.IntStream;

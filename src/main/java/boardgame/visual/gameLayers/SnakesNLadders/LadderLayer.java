@@ -1,4 +1,4 @@
-package boardgame.visual.elements;
+package boardgame.visual.gameLayers.SnakesNLadders;
 
 import java.util.Iterator;
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.List;
 import boardgame.model.boardFiles.Tile;
 import boardgame.model.effectFiles.LadderEffect;
 import boardgame.model.effectFiles.SnakeEffect;
+import boardgame.visual.elements.BoardVisual;
+import boardgame.visual.elements.TileVisual;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;

@@ -10,7 +10,7 @@ import boardgame.model.effectFiles.LadderEffect;
 import boardgame.model.effectFiles.SnakeEffect;
 import boardgame.utils.GameSetup;
 import boardgame.visual.elements.BoardVisual;
-import boardgame.visual.elements.LadderLayer;
+import boardgame.visual.gameLayers.SnakesNLadders.LadderLayer;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
