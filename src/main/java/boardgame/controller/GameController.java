@@ -6,26 +6,23 @@ import boardgame.model.boardFiles.Player;
 import boardgame.model.boardFiles.Tile;
 import boardgame.model.diceFiles.Dice;
 import boardgame.utils.LoopingIterator;
-import boardgame.visual.elements.BoardVisual;
-import boardgame.visual.elements.ButtonVisual;
-import javafx.scene.layout.HBox;
 
 public class GameController {
 
+    private VisualController visualController;
+
     private final Board board;
     private final List<Tile> tiles;
-    private final BoardVisual boardVisual;
     private final List<Player> players;
-    private Dice dice;
+    private final Dice dice;
     private Player playerWhoseTurn;
     private final LoopingIterator<Player> playerIterator;
-    private final ButtonVisual diceButton = new ButtonVisual(() -> handleRollDice());
+;
     private Player playerToSkip = null;
 
-    public GameController(Board board, BoardVisual boardVisual, List<Player> players) {
+    public GameController(Board board, List<Player> players) {
         this.board = board;
         this.tiles = board.getTiles();
-        this.boardVisual = boardVisual;
         this.players = players;
         this.playerIterator = new LoopingIterator<>(players);
         this.dice = new Dice(1);
@@ -41,7 +38,6 @@ public class GameController {
     }
 
     public void movePlayer(Player player, int tileNumber) {
-
         tiles.get(player.getPosition() - 1).popPlayer();
 
         player.setPosition(tileNumber);
@@ -52,7 +48,7 @@ public class GameController {
             targetTile.getEffect().execute(player, this);
         }
 
-        boardVisual.updateEntireBoard();
+        visualController.updateEntireBoard();
     }
 
     public void moveBy(Player player, int steps) {
@@ -62,7 +58,9 @@ public class GameController {
     }
 
     public void handleRollDice() {
-        moveBy(playerWhoseTurn, dice.roll()); 
+        int diceRoll = dice.roll();
+        moveBy(playerWhoseTurn, diceRoll); 
+        visualController.displayRoll(diceRoll);
         advanceTurn();
         
     }
@@ -81,13 +79,11 @@ public class GameController {
         if (playerToSkip != null && playerToSkip.equals(playerWhoseTurn)) {
             playerToSkip = null;
             playerWhoseTurn = playerIterator.next();
-
         }
     }
 
-    public HBox getDiceButton() {
-        return diceButton.getPane();
+    public void setVisualController(VisualController takenVisualController) {
+        visualController = takenVisualController; 
     }
-       
     
 }

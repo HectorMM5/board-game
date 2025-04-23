@@ -1,4 +1,4 @@
-package boardgame.controller;
+package boardgame.visual.gameLayers.SnakesNLadders;
 
 import java.util.Iterator;
 import java.util.List;
@@ -7,27 +7,22 @@ import boardgame.model.boardFiles.Tile;
 import boardgame.model.effectFiles.LadderEffect;
 import boardgame.model.effectFiles.SnakeEffect;
 import boardgame.visual.elements.BoardVisual;
-import boardgame.visual.elements.LadderVisual;
-import boardgame.visual.elements.SnakeVisual;
 import boardgame.visual.elements.TileVisual;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.transform.Rotate;
 
-public class LadderLayer {
+public class LadderLayer extends Pane {
 
-    private BoardVisual boardVisual;
-
-    Pane ladderLayer = new Pane();
+    private final BoardVisual boardVisual;
 
     public LadderLayer(BoardVisual boardVisual, List<Tile> tilesWithLadders, List<Tile> tilesWithSnakes) {
         this.boardVisual = boardVisual;
 
-        ladderLayer.setPrefSize(536, 482); // same as board
-        ladderLayer.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        ladderLayer.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        //ladderLayer.setStyle("-fx-border-color: yellow; -fx-border-width: 2;");
+        this.setPrefSize(536, 482);
+        this.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        this.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
         for (Tile tile : tilesWithLadders) {
             renderLadder((LadderEffect) tile.getEffect());
@@ -36,8 +31,6 @@ public class LadderLayer {
         for (Tile tile : tilesWithSnakes) {
             renderSnake((SnakeEffect) tile.getEffect());
         }
-
-
 
     }
 
@@ -90,7 +83,7 @@ public class LadderLayer {
 
         ladderVisual.getTransforms().add(new Rotate(-angle, 25, 0));
 
-        ladderLayer.getChildren().add(ladderVisual);
+        this.getChildren().add(ladderVisual);
 
     }
 
@@ -142,12 +135,8 @@ public class LadderLayer {
 
         snakeVisual.getTransforms().add(new Rotate(-angle, 25, 0));
 
-        ladderLayer.getChildren().add(snakeVisual);
+        this.getChildren().add(snakeVisual);
 
-    }
-
-    public Pane getLadder() {
-        return ladderLayer;
     }
 
 }

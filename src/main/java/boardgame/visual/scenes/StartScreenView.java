@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class StartScreenView {
-    private Stage primaryStage;
+    private final Stage primaryStage;
 
     public StartScreenView(Stage primaryStage) {
         this.primaryStage = primaryStage;

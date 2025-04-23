@@ -4,20 +4,30 @@ import java.util.List;
 
 import boardgame.controller.BoardJSON;
 import boardgame.controller.GameController;
+import boardgame.controller.VisualController;
 import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Player;
 import boardgame.visual.elements.BoardVisual;
+import boardgame.visual.elements.SideColumnVisual;
+import javafx.scene.layout.VBox;
 
 public class GameSetup {
 
-    Board board;
-    BoardVisual boardVisual;
-    GameController gameController;
+    private final Board board;
+    private final BoardVisual boardVisual;
+    private GameController gameController;
+    private final SideColumnVisual sideColumnVisual;
+    private final VisualController visualController;
 
     public GameSetup(String game, int boardChoice, List<Player> players) {
-        board = BoardJSON.constructSnLBoardFromJSON(boardChoice, gameController);
+        board = BoardJSON.constructSnLBoardFromJSON(boardChoice, gameController); // OK if gameController is unused here
         boardVisual = new BoardVisual(board);
-        gameController = new GameController(board, boardVisual, players);
+
+        gameController = new GameController(board, players); // step 1
+        visualController = new VisualController(gameController, boardVisual);    // step 2
+        gameController.setVisualController(visualController);                    // step 3
+
+        sideColumnVisual = new SideColumnVisual(players, visualController.getDiceAnimation());
 
     }
 
@@ -33,5 +43,13 @@ public class GameSetup {
         return gameController;
     }
 
-    
+    public VisualController getVisualController() {
+        return visualController;
+    }
+
+    public VBox getSideColumn() {
+        return sideColumnVisual.getColumn();
+
+    }
+
 }

@@ -1,33 +1,41 @@
-package boardgame.visual.elements;
+package boardgame.visual.scenes;
 
 import java.util.ArrayList;
 
 import boardgame.controller.GameController;
-import boardgame.controller.LadderLayer;
+import boardgame.controller.VisualController;
 import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Tile;
 import boardgame.model.effectFiles.LadderEffect;
 import boardgame.model.effectFiles.SnakeEffect;
 import boardgame.utils.GameSetup;
+import boardgame.visual.elements.BoardVisual;
+import boardgame.visual.gameLayers.SnakesNLadders.LadderLayer;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Ingame {
+
     private final Board board;
     private final BoardVisual boardVisual;
+    private final VisualController visualController;
+    private final VBox sideColumn;
     GameController gameController;
 
     public Ingame(GameSetup gameSetup) {
-        board = gameSetup.getBoard();
-        boardVisual = gameSetup.getBoardVisual();
-        gameController = gameSetup.getGameController();
+        this.board = gameSetup.getBoard();
+        this.boardVisual = gameSetup.getBoardVisual();
+        this.gameController = gameSetup.getGameController();
+        this.visualController = gameSetup.getVisualController();
+        this.sideColumn = gameSetup.getSideColumn();
+        
 
     }
-    
 
-    public void createGameScene(Stage primaryStage) { 
+    public void createGameScene(Stage primaryStage) {
         StackPane centerPane = new StackPane();
         centerPane.getChildren().add(boardVisual);
     
@@ -50,7 +58,8 @@ public class Ingame {
         }
     
         BorderPane root = new BorderPane();
-        root.setBottom(gameController.getDiceButton()); 
+        root.setBottom(visualController.getDiceButton()); 
+        root.setLeft(sideColumn);
     
         Scene scene = new Scene(root, 600, 600);
         primaryStage.setTitle("Board Game");
@@ -58,12 +67,12 @@ public class Ingame {
         primaryStage.show();
     
         LadderLayer ladders = new LadderLayer(boardVisual, tilesWithLadders, tilesWithSnakes);
-        centerPane.getChildren().add(ladders.getLadder());
+        centerPane.getChildren().add(ladders);
         root.setCenter(centerPane);
 
         gameController.start();
     
         boardVisual.updateEntireBoard();
     }
-    
+
 }
