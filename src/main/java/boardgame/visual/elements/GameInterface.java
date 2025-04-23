@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class GameInterface {
-    private Stage primaryStage;
+    private final Stage primaryStage;
 
     public GameInterface(Stage primaryStage) {
         this.primaryStage = primaryStage;

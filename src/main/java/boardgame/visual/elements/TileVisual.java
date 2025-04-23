@@ -46,6 +46,7 @@ public class TileVisual extends StackPane {
     private final ImageView iconView;
     private final Pane cover;
     private final Label playersInTile;
+    private final Label viewNumber;
 
     /**
      * Constructs a new {@code TileVisual} based on paramet.
@@ -61,7 +62,7 @@ public class TileVisual extends StackPane {
         iconView.setFitWidth(40);
         iconView.setFitHeight(40);
 
-        Label viewNumber = new Label(Integer.toString(tile.getNumber()));
+        viewNumber = new Label(Integer.toString(tile.getNumber()));
 
         this.cover = new Pane();
         cover.setPrefSize(50, 50);
@@ -89,7 +90,8 @@ public class TileVisual extends StackPane {
      */
     public void updateVisual() {
         if (tile.getEffect() != null) {
-            this.background.setFill(Color.rgb(205, 84, 84));
+            this.background.setFill(tile.getEffect().getColor());
+            viewNumber.setTextFill(Color.WHITE);            
         }
 
         List<Player> players = tile.getPlayers();

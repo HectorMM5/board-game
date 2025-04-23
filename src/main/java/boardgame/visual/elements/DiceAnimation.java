@@ -17,23 +17,21 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-public class DiceAnimation {
+public class DiceAnimation extends GridPane {
 
-    private GridPane diceBase;
     private List<Circle> points;
-    private Random random = new Random();
+    private final Random random = new Random();
 
     public DiceAnimation() {
-        this.diceBase = new GridPane();
         this.points = new ArrayList<>(9);
 
-        diceBase.setHgap(0);
-        diceBase.setVgap(0);
-        diceBase.setPadding(Insets.EMPTY);
-        diceBase.setAlignment(Pos.CENTER);
-        diceBase.setPrefWidth(225);
-        diceBase.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        diceBase.setStyle("-fx-background-color: white;");
+        this.setHgap(0);
+        this.setVgap(0);
+        this.setPadding(Insets.EMPTY);
+        this.setAlignment(Pos.CENTER);
+        this.setPrefWidth(225);
+        this.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        this.setStyle("-fx-background-color: white;");
 
         IntStream.rangeClosed(0, 8)
                 .forEach(i -> {
@@ -45,13 +43,9 @@ public class DiceAnimation {
                     points.add(circle);
 
                     die.getChildren().addAll(background, circle);
-                    diceBase.add(die, i % 3, i / 3);
+                    this.add(die, i % 3, i / 3);
                 });
 
-    }
-
-    public GridPane getDiceBase() {
-        return diceBase;
     }
 
     public void displayRoll(int finalRoll) {

@@ -11,20 +11,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class SideColumnVisual extends VBox {
-    private final List<Player> players;
-    private final DiceAnimation diceAnimation;
 
     public SideColumnVisual(List<Player> players, DiceAnimation diceAnimation) {
-        this.players = players;
-        this.diceAnimation = diceAnimation;
-
-
+        
         this.setPrefWidth(500);
         this.setSpacing(250);
         this.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
 
         BorderPane diceWrapper = new BorderPane();
-        diceWrapper.setCenter(diceAnimation.getDiceBase());
+        diceWrapper.setCenter(diceAnimation);
         diceWrapper.setMaxWidth(Double.MAX_VALUE);
         diceWrapper.setPrefWidth(500);
 
