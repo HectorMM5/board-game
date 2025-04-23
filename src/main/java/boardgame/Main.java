@@ -1,13 +1,13 @@
 package boardgame;
 
-import boardgame.visual.elements.GameInterface;
+import boardgame.visual.scenes.StartScreenView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage){
-        GameInterface ui = new GameInterface(primaryStage);
+        StartScreenView ui = new StartScreenView(primaryStage);
         ui.init();
         ui.start();
     }
