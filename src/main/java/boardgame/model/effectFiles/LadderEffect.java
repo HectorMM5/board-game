@@ -3,6 +3,7 @@ package boardgame.model.effectFiles;
 
 import boardgame.controller.GameController;
 import boardgame.model.boardFiles.Player;
+import javafx.scene.paint.Color;
 
 public class LadderEffect implements Effect {
 
@@ -18,6 +19,11 @@ public class LadderEffect implements Effect {
     @Override
     public void execute(Player player, GameController gameController) {
         gameController.movePlayer(player, targetTileIndex);
+    }
+
+    @Override
+    public Color getColor() {
+        return Color.BLUE;
     }
 
     public int getBaseTileIndex() {
