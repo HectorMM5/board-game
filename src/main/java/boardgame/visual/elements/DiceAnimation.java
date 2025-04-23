@@ -58,9 +58,6 @@ public class DiceAnimation {
         for (int i : indices) {
             points.get(i).setFill(Color.BLACK);
         }
-    }
-    
-
-    
+    }    
     
 }

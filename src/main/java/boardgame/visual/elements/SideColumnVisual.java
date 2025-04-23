@@ -10,12 +10,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class SideColumnVisual extends VBox {
-    DiceAnimation diceAnimation = new DiceAnimation();
+    DiceAnimation diceAnimation;
 
     List<Player> players;
 
-    public SideColumnVisual(List<Player> players) {
+    public SideColumnVisual(List<Player> players, DiceAnimation diceAnimation) {
         this.players = players;
+        this.diceAnimation = diceAnimation;
 
         this.setAlignment(Pos.CENTER);
         this.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
@@ -28,8 +29,6 @@ public class SideColumnVisual extends VBox {
     public VBox getColumn() {
         return this;
     }
-
-    
 
     
     
