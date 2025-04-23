@@ -6,28 +6,23 @@ import boardgame.model.boardFiles.Player;
 import boardgame.model.boardFiles.Tile;
 import boardgame.model.diceFiles.Dice;
 import boardgame.utils.LoopingIterator;
-import boardgame.visual.elements.BoardVisual;
-import boardgame.visual.elements.ButtonVisual;
-import boardgame.visual.elements.DiceAnimation;
-import javafx.scene.layout.HBox;
 
 public class GameController {
 
+    private VisualController visualController;
+
     private final Board board;
     private final List<Tile> tiles;
-    private final BoardVisual boardVisual;
     private final List<Player> players;
     private Dice dice;
     private Player playerWhoseTurn;
     private final LoopingIterator<Player> playerIterator;
-    private final DiceAnimation diceVisual = new DiceAnimation();
-    private final ButtonVisual diceButton = new ButtonVisual(() -> handleRollDice());
+;
     private Player playerToSkip = null;
 
-    public GameController(Board board, BoardVisual boardVisual, List<Player> players) {
+    public GameController(Board board, List<Player> players) {
         this.board = board;
         this.tiles = board.getTiles();
-        this.boardVisual = boardVisual;
         this.players = players;
         this.playerIterator = new LoopingIterator<>(players);
         this.dice = new Dice(1);
@@ -53,7 +48,7 @@ public class GameController {
             targetTile.getEffect().execute(player, this);
         }
 
-        boardVisual.updateEntireBoard();
+        visualController.updateEntireBoard();
     }
 
     public void moveBy(Player player, int steps) {
@@ -65,7 +60,7 @@ public class GameController {
     public void handleRollDice() {
         int diceRoll = dice.roll();
         moveBy(playerWhoseTurn, diceRoll); 
-        diceVisual.displayRoll(diceRoll);
+        visualController.displayRoll(diceRoll);
         advanceTurn();
         
     }
@@ -87,13 +82,8 @@ public class GameController {
         }
     }
 
-    public HBox getDiceButton() {
-        return diceButton.getPane();
+    public void setVisualController(VisualController takenVisualController) {
+        visualController = takenVisualController; 
     }
-
-    public DiceAnimation getDiceAnimation() {
-        return diceVisual;
-    }
-       
     
 }

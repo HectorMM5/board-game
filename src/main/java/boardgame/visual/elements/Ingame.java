@@ -3,6 +3,7 @@ package boardgame.visual.elements;
 import java.util.ArrayList;
 
 import boardgame.controller.GameController;
+import boardgame.controller.VisualController;
 import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Tile;
 import boardgame.model.effectFiles.LadderEffect;
@@ -18,14 +19,16 @@ public class Ingame {
 
     private final Board board;
     private final BoardVisual boardVisual;
+    private final VisualController visualController;
     private final VBox sideColumn;
     GameController gameController;
 
     public Ingame(GameSetup gameSetup) {
-        board = gameSetup.getBoard();
-        boardVisual = gameSetup.getBoardVisual();
-        gameController = gameSetup.getGameController();
-        sideColumn = gameSetup.getSideColumn();
+        this.board = gameSetup.getBoard();
+        this.boardVisual = gameSetup.getBoardVisual();
+        this.gameController = gameSetup.getGameController();
+        this.visualController = gameSetup.getVisualController();
+        this.sideColumn = gameSetup.getSideColumn();
         
 
     }
@@ -53,7 +56,7 @@ public class Ingame {
         }
     
         BorderPane root = new BorderPane();
-        root.setBottom(gameController.getDiceButton()); 
+        root.setBottom(visualController.getDiceButton()); 
         root.setLeft(sideColumn);
     
         Scene scene = new Scene(root, 600, 600);

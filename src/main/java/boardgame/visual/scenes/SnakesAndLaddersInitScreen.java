@@ -17,6 +17,7 @@ public class SnakesAndLaddersInitScreen extends GameInitScreen {
     public void startGame(Button button){
         ArrayList<Player> playerList = this.getCurrentPlayers();
         if (playerList != null && playerList.size() > 1) {
+            
             new Ingame(new GameSetup("SnL", 0, playerList)).createGameScene(this.primaryStage);
             return;
         }
