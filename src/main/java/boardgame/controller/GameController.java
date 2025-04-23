@@ -8,6 +8,7 @@ import boardgame.model.diceFiles.Dice;
 import boardgame.utils.LoopingIterator;
 import boardgame.visual.elements.BoardVisual;
 import boardgame.visual.elements.ButtonVisual;
+import boardgame.visual.elements.DiceAnimation;
 import javafx.scene.layout.HBox;
 
 public class GameController {
@@ -19,6 +20,7 @@ public class GameController {
     private Dice dice;
     private Player playerWhoseTurn;
     private final LoopingIterator<Player> playerIterator;
+    private final DiceAnimation diceVisual = new DiceAnimation();
     private final ButtonVisual diceButton = new ButtonVisual(() -> handleRollDice());
     private Player playerToSkip = null;
 
@@ -41,7 +43,6 @@ public class GameController {
     }
 
     public void movePlayer(Player player, int tileNumber) {
-
         tiles.get(player.getPosition() - 1).popPlayer();
 
         player.setPosition(tileNumber);
@@ -62,7 +63,9 @@ public class GameController {
     }
 
     public void handleRollDice() {
-        moveBy(playerWhoseTurn, dice.roll()); 
+        int diceRoll = dice.roll();
+        moveBy(playerWhoseTurn, diceRoll); 
+        diceVisual.displayRoll(diceRoll);
         advanceTurn();
         
     }
@@ -81,12 +84,15 @@ public class GameController {
         if (playerToSkip != null && playerToSkip.equals(playerWhoseTurn)) {
             playerToSkip = null;
             playerWhoseTurn = playerIterator.next();
-
         }
     }
 
     public HBox getDiceButton() {
         return diceButton.getPane();
+    }
+
+    public DiceAnimation getDiceAnimation() {
+        return diceVisual;
     }
        
     

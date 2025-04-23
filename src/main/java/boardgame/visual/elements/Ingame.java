@@ -3,7 +3,6 @@ package boardgame.visual.elements;
 import java.util.ArrayList;
 
 import boardgame.controller.GameController;
-import boardgame.controller.LadderLayer;
 import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Tile;
 import boardgame.model.effectFiles.LadderEffect;
@@ -12,22 +11,26 @@ import boardgame.utils.GameSetup;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Ingame {
+
     private final Board board;
     private final BoardVisual boardVisual;
+    private final VBox sideColumn;
     GameController gameController;
 
     public Ingame(GameSetup gameSetup) {
         board = gameSetup.getBoard();
         boardVisual = gameSetup.getBoardVisual();
         gameController = gameSetup.getGameController();
+        sideColumn = gameSetup.getSideColumn();
+        
 
     }
-    
 
-    public void createGameScene(Stage primaryStage) { 
+    public void createGameScene(Stage primaryStage) {
         StackPane centerPane = new StackPane();
         centerPane.getChildren().add(boardVisual);
     
@@ -51,6 +54,7 @@ public class Ingame {
     
         BorderPane root = new BorderPane();
         root.setBottom(gameController.getDiceButton()); 
+        root.setLeft(sideColumn);
     
         Scene scene = new Scene(root, 600, 600);
         primaryStage.setTitle("Board Game");
@@ -65,5 +69,5 @@ public class Ingame {
     
         boardVisual.updateEntireBoard();
     }
-    
+
 }
