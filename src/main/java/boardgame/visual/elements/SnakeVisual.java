@@ -13,14 +13,14 @@ public class SnakeVisual extends Group {
         skull.setCenterX(25);
         skull.setCenterY(length - 5);
         skull.setRadius(15);
-        skull.setFill(Color.GREEN);
+        skull.setFill(Color.ORANGE);
 
         Rectangle body = new Rectangle();
         body.setY(0);
         body.setX(15);
         body.setWidth(20);
         body.setHeight(length - 15);
-        body.setFill(Color.GREEN);
+        body.setFill(Color.ORANGE);
 
         Rectangle toungue = new Rectangle();
         toungue.setY(length + 5);

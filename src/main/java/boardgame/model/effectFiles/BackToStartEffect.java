@@ -18,6 +18,6 @@ public class BackToStartEffect implements Effect {
 
     @Override
     public Color getColor() {
-        return Color.PURPLE;
+        return Color.BLACK;
     }
 }
