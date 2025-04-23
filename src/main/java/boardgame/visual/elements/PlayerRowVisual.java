@@ -19,12 +19,16 @@ public class PlayerRowVisual {
 
         row.setBackground(Background.fill(Color.WHITE));
 
-        Image playerIcon = new Image(getClass().getResourceAsStream(player.getIcon()));
+        ImageView playerIcon = new ImageView(new Image(getClass().getResourceAsStream(player.getIcon())));
+
+        playerIcon.setFitWidth(50);
+        playerIcon.setFitHeight(50);
+
         Label name = new Label(player.getName());
 
         turnCircle = new Circle(3, Color.WHITE);
 
-        row.getChildren().addAll(new ImageView(playerIcon), name);
+        row.getChildren().addAll(playerIcon, name);
 
 
     }
@@ -33,6 +37,12 @@ public class PlayerRowVisual {
         turnCircle.setFill(Color.YELLOW);
         
     }
+
+    public HBox getRow() {
+        return row;
+    }
+
+    
  
     
 }
