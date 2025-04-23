@@ -3,7 +3,6 @@ package boardgame.visual.elements;
 import java.util.ArrayList;
 
 import boardgame.controller.GameController;
-import boardgame.controller.LadderLayer;
 import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Tile;
 import boardgame.model.effectFiles.LadderEffect;
