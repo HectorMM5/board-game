@@ -6,30 +6,36 @@ import boardgame.model.boardFiles.Player;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class SideColumnVisual extends VBox {
-    DiceAnimation diceAnimation;
-
-    List<Player> players;
+    private final List<Player> players;
+    private final DiceAnimation diceAnimation;
 
     public SideColumnVisual(List<Player> players, DiceAnimation diceAnimation) {
         this.players = players;
         this.diceAnimation = diceAnimation;
 
-        this.setAlignment(Pos.CENTER);
-        this.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
-        this.setPrefWidth(400);
-        this.getChildren().add(new PlayerRowsVisual(players).getPlayerRows());
-        this.getChildren().add(diceAnimation.getDiceBase());
 
+        this.setPrefWidth(500);
+        this.setSpacing(250);
+        this.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
+
+        BorderPane diceWrapper = new BorderPane();
+        diceWrapper.setCenter(diceAnimation.getDiceBase());
+        diceWrapper.setMaxWidth(Double.MAX_VALUE);
+        diceWrapper.setPrefWidth(500);
+
+        this.getChildren().add(diceWrapper);
+        this.getChildren().add(new PlayerRowsVisual(players).getPlayerRows());
+
+        this.setAlignment(Pos.CENTER); 
     }
 
     public VBox getColumn() {
         return this;
     }
-
-    
     
 }
