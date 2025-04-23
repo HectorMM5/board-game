@@ -9,33 +9,24 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class SideColumnVisual {
+public class SideColumnVisual extends VBox {
     DiceAnimation diceAnimation = new DiceAnimation();
 
     List<Player> players;
-    VBox column;
 
     public SideColumnVisual(List<Player> players) {
         this.players = players;
 
-        column = new VBox();
-        column.setAlignment(Pos.CENTER);
-
-        column.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
-
-        column.setPrefWidth(400);
-
-        for (Player player : players) {
-            column.getChildren().add(new PlayerRowVisual(player).getRow());
-            
-        }
-
-        column.getChildren().add(diceAnimation.getDiceBase());
+        this.setAlignment(Pos.CENTER);
+        this.setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
+        this.setPrefWidth(400);
+        this.getChildren().add(new PlayerRowsVisual(players).getPlayerRows());
+        this.getChildren().add(diceAnimation.getDiceBase());
 
     }
 
     public VBox getColumn() {
-        return column;
+        return this;
     }
 
     
