@@ -5,10 +5,8 @@ import javafx.scene.layout.HBox;
 
 
 public class ButtonVisual extends HBox {
-    private Runnable onDiceRoll;
 
     public ButtonVisual(Runnable onDiceRoll) {
-        this.onDiceRoll = onDiceRoll;
 
         Button rollDiceButton = new Button("Roll dice");
         rollDiceButton.setOnAction(e -> {

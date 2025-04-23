@@ -5,9 +5,8 @@ import boardgame.model.boardFiles.Player;
 
 public class SnakeEffect implements Effect {
 
-    private int baseTileIndex;
-    private int targetTileIndex;
-    private GameController gameController;
+    private final int baseTileIndex;
+    private final int targetTileIndex;
 
     public SnakeEffect(int baseTileIndex, int targetTileIndex) {
         this.baseTileIndex = baseTileIndex;

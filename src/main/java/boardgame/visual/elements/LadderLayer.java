@@ -13,7 +13,7 @@ import javafx.scene.transform.Rotate;
 
 public class LadderLayer extends Pane {
 
-    private BoardVisual boardVisual;
+    private final BoardVisual boardVisual;
 
     public LadderLayer(BoardVisual boardVisual, List<Tile> tilesWithLadders, List<Tile> tilesWithSnakes) {
         this.boardVisual = boardVisual;

@@ -14,7 +14,7 @@ public class GameController {
     private final Board board;
     private final List<Tile> tiles;
     private final List<Player> players;
-    private Dice dice;
+    private final Dice dice;
     private Player playerWhoseTurn;
     private final LoopingIterator<Player> playerIterator;
 ;
