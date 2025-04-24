@@ -8,7 +8,7 @@ public class Player {
     int position;
     Color color;
 
-    public Player(String icon, String name, Color color) {
+    public Player(String icon, String name) {
         this.icon = icon;
         this.name = name;
         this.color = color;
@@ -24,10 +24,6 @@ public class Player {
     public void setIcon(String icon) { this.icon = icon; }
 
     public String getName() { return name; }
-
-    public Color getColor() { return color; }
-
-    public void setColor(Color color) { this.color = color; }
 
     public void moveToTile(Tile tile) {
         position = tile.getNumber() + 1;

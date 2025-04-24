@@ -1,18 +1,17 @@
 package boardgame.controller;
 
-import boardgame.model.boardFiles.Player;
-import boardgame.visual.scenes.GameInitView;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import boardgame.model.boardFiles.Player;
+import boardgame.visual.scenes.GameInitView;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 public class GameInitController {
     
@@ -51,7 +50,7 @@ public class GameInitController {
         
         view.addPlayerField(playerNames, index, iconFileNames.get(0), 
             iconBtnHandler, dropdownHandler, saveBtnHandler, initialIconImage);
-        }
+    }
 
 
 
