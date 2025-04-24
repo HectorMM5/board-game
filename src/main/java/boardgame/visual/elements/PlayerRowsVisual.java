@@ -49,6 +49,5 @@ public class PlayerRowsVisual extends VBox {
     public PlayerRowsVisual getPlayerRows() {
         return this;
     }  
- 
     
 }
