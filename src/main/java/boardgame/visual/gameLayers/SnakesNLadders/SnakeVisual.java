@@ -1,4 +1,4 @@
-package boardgame.visual.elements;
+package boardgame.visual.gameLayers.SnakesNLadders;
 
 import javafx.scene.Group;
 import javafx.scene.paint.Color;

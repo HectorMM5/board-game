@@ -1,6 +1,6 @@
-package boardgame.visual.elements;
+package boardgame.visual.scenes;
 
-import boardgame.visual.scenes.SnakesAndLaddersInitScreen;
+import boardgame.controller.SnakesAndLaddersInitController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -11,10 +11,10 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-public class GameInterface {
+public class StartScreenView {
     private final Stage primaryStage;
 
-    public GameInterface(Stage primaryStage) {
+    public StartScreenView(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
@@ -34,7 +34,7 @@ public class GameInterface {
 
         b1.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                new SnakesAndLaddersInitScreen(primaryStage).start();
+                new SnakesAndLaddersInitController(primaryStage).start();
             }
         });
 
