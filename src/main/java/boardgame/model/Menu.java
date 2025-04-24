@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import boardgame.model.boardFiles.Player;
 import boardgame.model.boardFiles.Rules;
+import javafx.scene.paint.Color;
 
 public class Menu {
     
@@ -48,7 +49,7 @@ public class Menu {
 
         for (int i = 0; i < playerCount; i++) {
             String playerName = "";
-            players.add(new Player("ICON", playerName));
+            players.add(new Player("ICON", playerName, Color.ANTIQUEWHITE));
 
         }
     }

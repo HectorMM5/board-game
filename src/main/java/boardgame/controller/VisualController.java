@@ -3,6 +3,7 @@ package boardgame.controller;
 import boardgame.visual.elements.BoardVisual;
 import boardgame.visual.elements.ButtonVisual;
 import boardgame.visual.elements.DiceAnimation;
+import boardgame.visual.gameLayers.PlayerTokenLayer;
 import javafx.scene.layout.HBox;
 
 public class VisualController {
@@ -10,12 +11,14 @@ public class VisualController {
     private final DiceAnimation diceVisual = new DiceAnimation();
     private final ButtonVisual diceButton;
     private final BoardVisual boardVisual;
+    private final PlayerTokenLayer tokenLayer;
 
 
     public VisualController(GameController gameController, BoardVisual boardVisual) {
         this.gameController = gameController;
         this.boardVisual = boardVisual;
         this.diceButton = new ButtonVisual(() -> gameController.handleRollDice());
+        this.tokenLayer = new PlayerTokenLayer(gameController, this);
     }
 
     public void updateEntireBoard() {
@@ -32,5 +35,13 @@ public class VisualController {
 
     public DiceAnimation getDiceAnimation() {
         return diceVisual;
+    }
+
+    public PlayerTokenLayer getPlayerTokenLayer() {
+        return tokenLayer;
+    }
+
+    public BoardVisual getBoardVisual() {
+        return boardVisual;
     }
 }

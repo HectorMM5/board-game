@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.layout.HBox;
 
 import java.io.File;
@@ -241,7 +242,7 @@ public class GameInitScreen {
                 relativeIconPath = ICON_RELATIVE_PATH + iconFileName;
             }
             
-            Player player = new Player(relativeIconPath, playerName);
+            Player player = new Player(relativeIconPath, playerName, Color.YELLOW);
             playerList.add(player);
         }
     }

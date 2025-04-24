@@ -6,6 +6,8 @@ import boardgame.model.boardFiles.Player;
 import boardgame.model.boardFiles.Tile;
 import boardgame.model.diceFiles.Dice;
 import boardgame.utils.LoopingIterator;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 public class GameController {
 
@@ -44,8 +46,15 @@ public class GameController {
         Tile targetTile = tiles.get(tileNumber - 1);
         targetTile.addPlayer(player);
 
+        visualController.getPlayerTokenLayer().moveToken(player, tileNumber);
+
         if (!(targetTile.getEffect() == null)) {
-            targetTile.getEffect().execute(player, this);
+            PauseTransition pause = new PauseTransition(Duration.millis(500));
+            pause.setOnFinished(event -> {
+                targetTile.getEffect().execute(player, this);
+            });
+            pause.play();
+
         }
 
         visualController.updateEntireBoard();
@@ -61,6 +70,7 @@ public class GameController {
         int diceRoll = dice.roll();
         moveBy(playerWhoseTurn, diceRoll); 
         visualController.displayRoll(diceRoll);
+
         advanceTurn();
         
     }
@@ -71,6 +81,14 @@ public class GameController {
 
     public Player getCurrentPlayer() {
         return playerWhoseTurn;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public Board getBoard() {
+        return board;
     }
     
     public void advanceTurn() {

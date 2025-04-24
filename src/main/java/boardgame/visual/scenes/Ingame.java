@@ -31,7 +31,6 @@ public class Ingame {
         this.gameController = gameSetup.getGameController();
         this.visualController = gameSetup.getVisualController();
         this.sideColumn = gameSetup.getSideColumn();
-        
 
     }
 
@@ -60,7 +59,7 @@ public class Ingame {
         BorderPane root = new BorderPane();
         root.setBottom(visualController.getDiceButton()); 
         root.setLeft(sideColumn);
-    
+
         Scene scene = new Scene(root, 600, 600);
         primaryStage.setTitle("Board Game");
         primaryStage.setScene(scene);
@@ -68,6 +67,7 @@ public class Ingame {
     
         LadderLayer ladders = new LadderLayer(boardVisual, tilesWithLadders, tilesWithSnakes);
         centerPane.getChildren().add(ladders);
+        centerPane.getChildren().add(visualController.getPlayerTokenLayer());
         root.setCenter(centerPane);
 
         gameController.start();

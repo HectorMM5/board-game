@@ -19,6 +19,8 @@ public class LadderEffect implements Effect {
     @Override
     public void execute(Player player, GameController gameController) {
         gameController.movePlayer(player, targetTileIndex);
+
+        System.out.println("Ladder activated");
     }
 
     @Override

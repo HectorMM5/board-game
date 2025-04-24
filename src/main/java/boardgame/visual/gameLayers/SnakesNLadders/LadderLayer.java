@@ -79,8 +79,6 @@ public class LadderLayer extends Pane {
 
         double angle = Math.toDegrees(Math.atan2(dx, dy));
 
-        System.out.println(angle);
-
         ladderVisual.getTransforms().add(new Rotate(-angle, 25, 0));
 
         this.getChildren().add(ladderVisual);
