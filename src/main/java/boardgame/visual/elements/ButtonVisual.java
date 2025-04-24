@@ -2,22 +2,20 @@ package boardgame.visual.elements;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 
 
-public class ButtonVisual extends HBox {
+public class ButtonVisual extends Button {
 
     public ButtonVisual(Runnable onDiceRoll) {
+        super("Roll dice");
         this.setAlignment(Pos.CENTER);
 
-        Button rollDiceButton = new Button("Roll dice");
-        rollDiceButton.setOnAction(e -> {
+        this.setOnAction(e -> {
             onDiceRoll.run();
+            setDisable(true);
             
         });
         
-        this.getChildren().add(rollDiceButton);
-        this.setSpacing(10);
         
     }
 

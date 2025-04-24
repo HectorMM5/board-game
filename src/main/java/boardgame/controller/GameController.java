@@ -78,11 +78,14 @@ public class GameController {
             pause.play();
         });
 
-        PauseTransition finalPause = new PauseTransition(Duration.millis((endTile - player.getPosition()) * 200));
+        PauseTransition finalPause = new PauseTransition(Duration.millis((endTile - player.getPosition() + 1) * 200));
         finalPause.setOnFinished(event -> {
             movePlayer(player, endTile);
+            visualController.getDiceButton().setDisable(false);
+            
         });
         finalPause.play();
+        
     }
 
     public void moveBy(Player player, int steps) {

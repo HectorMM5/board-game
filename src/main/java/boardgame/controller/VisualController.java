@@ -16,7 +16,10 @@ public class VisualController {
     public VisualController(GameController gameController, BoardVisual boardVisual) {
         this.gameController = gameController;
         this.boardVisual = boardVisual;
-        this.diceButton = new ButtonVisual(() -> gameController.handleRollDice());
+        this.diceButton = new ButtonVisual(() -> {
+            gameController.handleRollDice();
+
+        });
         this.tokenLayer = new PlayerTokenLayer(gameController, this);
     }
 
