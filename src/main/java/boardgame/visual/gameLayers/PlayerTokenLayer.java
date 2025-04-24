@@ -6,6 +6,7 @@ import java.util.Map;
 import boardgame.controller.GameController;
 import boardgame.controller.VisualController;
 import boardgame.model.boardFiles.Player;
+import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,23 +42,10 @@ public class PlayerTokenLayer extends Pane {
     public void moveToken(Player player, int tileNumber) {
         ImageView token = playerTokens.get(player);
 
-        int boardWidth = 10;
         int spacing = 54; // TILE_SIZE (50) + GAP (4)   
 
         int col = visualController.getBoardVisual().getCols().get(tileNumber); //TILENUMBER TAR INN DIREKTE DICE!!!! HUSK
         int row = visualController.getBoardVisual().getRows().get(tileNumber);
-
-        System.out.println("Calling getRows() from: " + System.identityHashCode(visualController.getBoardVisual()));
-        System.out.println("Calling getCols() from: " + System.identityHashCode(visualController.getBoardVisual()));
-
-        System.out.println("Trying to access row for tile number: " + tileNumber);
-        System.out.println("Rows map contains: " + visualController.getBoardVisual().getRows().containsKey(tileNumber));
-        System.out.println("Cols map contains: " + visualController.getBoardVisual().getCols().containsKey(tileNumber));
-
-
-        System.out.println(tileNumber);
-        System.out.println(col);
-        System.out.println(row);
 
         double targetX = col * spacing;
         double targetY = row * spacing;
@@ -69,6 +57,15 @@ public class PlayerTokenLayer extends Pane {
         move.setToX(targetX);
         move.setToY(targetY);
         move.play();
+
+    }
+    
+    public void moveStep(Player player, int position) {
+        PauseTransition pause = new PauseTransition(Duration.millis(100));
+        pause.setOnFinished(e -> {
+            moveToken(player, position + 1);
+        });
+        pause.play();
     }
 
 

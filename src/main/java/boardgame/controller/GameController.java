@@ -1,10 +1,16 @@
 package boardgame.controller;
+
 import java.util.List;
+import java.util.stream.IntStream;
 
 import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Player;
 import boardgame.model.boardFiles.Tile;
 import boardgame.model.diceFiles.Dice;
+import boardgame.model.effectFiles.BackToStartEffect;
+import boardgame.model.effectFiles.LadderEffect;
+import boardgame.model.effectFiles.MovementEffect;
+import boardgame.model.effectFiles.SnakeEffect;
 import boardgame.utils.LoopingIterator;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
@@ -19,7 +25,7 @@ public class GameController {
     private final Dice dice;
     private Player playerWhoseTurn;
     private final LoopingIterator<Player> playerIterator;
-;
+    ;
     private Player playerToSkip = null;
 
     public GameController(Board board, List<Player> players) {
@@ -32,7 +38,7 @@ public class GameController {
 
     }
 
-    public void start() {    
+    public void start() {
         for (Player player : players) {
             board.getTiles().get(0).addPlayer(player);
         }
@@ -46,13 +52,16 @@ public class GameController {
         Tile targetTile = tiles.get(tileNumber - 1);
         targetTile.addPlayer(player);
 
-        visualController.getPlayerTokenLayer().moveToken(player, tileNumber);
-
         if (!(targetTile.getEffect() == null)) {
             PauseTransition pause = new PauseTransition(Duration.millis(500));
             pause.setOnFinished(event -> {
                 targetTile.getEffect().execute(player, this);
+
+                if (targetTile.getEffect() instanceof LadderEffect || targetTile.getEffect() instanceof SnakeEffect || targetTile.getEffect() instanceof BackToStartEffect) {
+                    visualController.getPlayerTokenLayer().moveToken(player, ((MovementEffect) targetTile.getEffect()).getTargetTileIndex());
+                }
             });
+
             pause.play();
 
         }
@@ -60,19 +69,35 @@ public class GameController {
         visualController.updateEntireBoard();
     }
 
+    public void movePlayerThroughPath(Player player, int endTile) {
+        IntStream.rangeClosed(0, endTile - player.getPosition() - 1).forEach(i -> {
+            PauseTransition pause = new PauseTransition(Duration.millis(i * 200));
+            pause.setOnFinished(event -> {
+                visualController.getPlayerTokenLayer().moveStep(player, player.getPosition() + i);
+            });
+            pause.play();
+        });
+
+        PauseTransition finalPause = new PauseTransition(Duration.millis((endTile - player.getPosition()) * 200));
+        finalPause.setOnFinished(event -> {
+            movePlayer(player, endTile);
+        });
+        finalPause.play();
+    }
+
     public void moveBy(Player player, int steps) {
         int nextPosition = player.getPosition() + steps;
-        movePlayer(player, nextPosition);
+        movePlayerThroughPath(player, nextPosition);
 
     }
 
     public void handleRollDice() {
         int diceRoll = dice.roll();
-        moveBy(playerWhoseTurn, diceRoll); 
+        moveBy(playerWhoseTurn, diceRoll);
         visualController.displayRoll(diceRoll);
 
         advanceTurn();
-        
+
     }
 
     public void markPlayerToSkip(Player player) {
@@ -90,7 +115,7 @@ public class GameController {
     public Board getBoard() {
         return board;
     }
-    
+
     public void advanceTurn() {
         playerWhoseTurn = playerIterator.next();
 
@@ -101,7 +126,7 @@ public class GameController {
     }
 
     public void setVisualController(VisualController takenVisualController) {
-        visualController = takenVisualController; 
+        visualController = takenVisualController;
     }
-    
+
 }

@@ -70,7 +70,7 @@ public class BoardJSON {
                 break;
 
             case "Back":
-                effect = new BackToStartEffect();
+                effect = new BackToStartEffect(tileNumber, 1);
                 break;
 
             default:

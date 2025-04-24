@@ -4,15 +4,9 @@ import boardgame.controller.GameController;
 import boardgame.model.boardFiles.Player;
 import javafx.scene.paint.Color;
 
-public class SnakeEffect implements Effect {
-
-    private final int baseTileIndex;
-    private final int targetTileIndex;
-
+public class SnakeEffect extends MovementEffect {
     public SnakeEffect(int baseTileIndex, int targetTileIndex) {
-        this.baseTileIndex = baseTileIndex;
-        this.targetTileIndex = targetTileIndex;
-
+        super(baseTileIndex, targetTileIndex);
     }
 
     @Override
@@ -23,14 +17,6 @@ public class SnakeEffect implements Effect {
     @Override
     public Color getColor() {
         return Color.GREEN;
-    }
-
-    public int getBaseTileIndex() {
-        return baseTileIndex;
-    }
-
-    public int getTargetTileIndex() {
-        return targetTileIndex;
     }
     
     

@@ -27,7 +27,7 @@ public class GameSetup {
         visualController = new VisualController(gameController, boardVisual);    // step 2
         gameController.setVisualController(visualController);                    // step 3
 
-        sideColumnVisual = new SideColumnVisual(players, visualController.getDiceAnimation());
+        sideColumnVisual = new SideColumnVisual(players, visualController.getDiceAnimation(), visualController.getDiceButton());
 
     }
 

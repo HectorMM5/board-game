@@ -4,7 +4,6 @@ import boardgame.visual.elements.BoardVisual;
 import boardgame.visual.elements.ButtonVisual;
 import boardgame.visual.elements.DiceAnimation;
 import boardgame.visual.gameLayers.PlayerTokenLayer;
-import javafx.scene.layout.HBox;
 
 public class VisualController {
     private final GameController gameController;
@@ -29,7 +28,7 @@ public class VisualController {
         diceVisual.displayRoll(diceRoll);
     }
 
-    public HBox getDiceButton() {
+    public ButtonVisual getDiceButton() {
         return diceButton;
     }
 

@@ -57,7 +57,6 @@ public class Ingame {
         }
     
         BorderPane root = new BorderPane();
-        root.setBottom(visualController.getDiceButton()); 
         root.setLeft(sideColumn);
 
         Scene scene = new Scene(root, 600, 600);
