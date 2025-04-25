@@ -11,6 +11,12 @@ import boardgame.visual.scenes.Ingame;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 
+/**
+ * Handles the core logic of the game, including player movement,
+ * turn advancement, and interaction with the board and effects.
+ * 
+ * @author Hector Mendana Morales
+ */
 public class GameController {
     private final Board board;
     private final List<Tile> tiles;
@@ -20,6 +26,12 @@ public class GameController {
     private Player playerToSkip = null;
     private Ingame ingame;
 
+    /**
+     * Constructs a new GameController with the specified board and player list.
+     *
+     * @param board the game board
+     * @param players the list of players participating in the game
+     */
     public GameController(Board board, List<Player> players) {
         this.board = board;
         this.tiles = board.getTiles();
@@ -27,18 +39,24 @@ public class GameController {
         this.players = players;
         this.playerIterator = new LoopingIterator<>(players);
         this.playerWhoseTurn = playerIterator.next();
-
-        
-
     }
 
+    /**
+     * Starts the game by placing all players on the first tile.
+     */
     public void start() {
         for (Player player : players) {
             board.getTiles().get(0).addPlayer(player);
         }
-
     }
 
+    /**
+     * Moves the given player to the specified tile number and executes
+     * any effect present on the target tile.
+     *
+     * @param player the player to move
+     * @param tileNumber the target tile number to move the player to
+     */
     public void movePlayer(Player player, int tileNumber) {
         tiles.get(player.getPosition() - 1).popPlayer();
 
@@ -53,61 +71,61 @@ public class GameController {
 
                 if (targetTile.getEffect() instanceof MovementEffect) {
                     ingame.moveToken(player, ((MovementEffect) targetTile.getEffect()).getTargetTileIndex());
-                    
                 }
             });
             pause.play();
-
         }
-
     }
 
+    /**
+     * Sets the reference to the Ingame UI object for triggering visual effects.
+     *
+     * @param ingame the Ingame instance associated with this controller
+     */
     public void setIngame(Ingame ingame) {
         this.ingame = ingame;
     }
 
-
-
-    //public void moveBy(Player player, int steps, ButtonVisual buttonVisual) {
-    //    int nextPosition = player.getPosition() + steps;
-//
-    //    movePlayerThroughPath(player, nextPosition);
-    //    PauseTransition finalPause = new PauseTransition(Duration.millis((nextPosition - player.getPosition() + 1) * 200));
-    //    finalPause.setOnFinished(event -> {
-    //        movePlayer(player, nextPosition);
-    //        getDiceButton().setDisable(false);
-    //        
-    //    });
-    //    finalPause.play();
-//
-    //}
-
-    //public void handleRollDice(ButtonVisual buttonVisual) {
-    //    int diceRoll = dice.roll();
-    //    
-    //    moveBy(playerWhoseTurn, diceRoll, buttonVisual);
-    //    visualController.displayRoll(diceRoll);
-//
-    //    advanceTurn();
-//
-    //}
-
+    /**
+     * Marks a player to skip their next turn.
+     *
+     * @param player the player who should skip their next turn
+     */
     public void markPlayerToSkip(Player player) {
         playerToSkip = player;
     }
 
+    /**
+     * Returns the player whose turn it currently is.
+     *
+     * @return the current player
+     */
     public Player getCurrentPlayer() {
         return playerWhoseTurn;
     }
 
+    /**
+     * Returns the list of players in the game.
+     *
+     * @return the player list
+     */
     public List<Player> getPlayers() {
         return players;
     }
 
+    /**
+     * Returns the game board.
+     *
+     * @return the board
+     */
     public Board getBoard() {
         return board;
     }
 
+    /**
+     * Advances the turn to the next player, skipping any player
+     * who is marked to be skipped.
+     */
     public void advanceTurn() {
         playerWhoseTurn = playerIterator.next();
 
@@ -116,6 +134,4 @@ public class GameController {
             playerWhoseTurn = playerIterator.next();
         }
     }
-
-
 }
