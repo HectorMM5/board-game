@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class GameInitController {
-    
+
     private final String ICON_RELATIVE_PATH = "/PlayerIcons/";
     private List<String> iconFileNames = new ArrayList<>();
     private PlayerDataAccess playerDataAccess = new PlayerDataAccess();
@@ -22,37 +22,34 @@ public class GameInitController {
     private GameInitView view;
     private ArrayList<Integer> playerIconIndexes = new ArrayList<>();
 
-    
     public GameInitController(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.view = new GameInitView(this.primaryStage);
         view.setController(this);
-        
+
         init();
     }
 
     private void init() {
         iconFileNames = playerDataAccess.getIconNames();
         view.init();
-        addPlayer(); 
+        addPlayer();
     }
-    
+
     public void addPlayer() {
         int index = playerIconIndexes.size();
-        playerIconIndexes.add(0); 
-        
+        playerIconIndexes.add(0);
+
         String[] playerNames = playerDataAccess.getPlayerNames();
         Image initialIconImage = playerDataAccess.getImageFromFileName(iconFileNames.get(0));
-        
+
         EventHandler<ActionEvent> iconBtnHandler = e -> handleIconButtonClick(index);
         EventHandler<ActionEvent> dropdownHandler = e -> handleDropdownSelection(index);
         EventHandler<ActionEvent> saveBtnHandler = e -> handleSaveButton(index);
-        
-        view.addPlayerField(playerNames, index, iconFileNames.get(0), 
-            iconBtnHandler, dropdownHandler, saveBtnHandler, initialIconImage);
+
+        view.addPlayerField(playerNames, index, iconFileNames.get(0),
+                iconBtnHandler, dropdownHandler, saveBtnHandler, initialIconImage);
     }
-
-
 
     private void handleIconButtonClick(int playerIndex) {
         int currentIndex = playerIconIndexes.get(playerIndex);
@@ -66,17 +63,17 @@ public class GameInitController {
         Image iconImage = playerDataAccess.getImageFromFileName(iconFileNames.get(currentIndex));
         view.updateIconButton(playerIndex, iconImage);
     }
-    
+
     private void handleDropdownSelection(int playerIndex) {
         String selectedPlayer = view.getPlayerName(playerIndex);
         String[] playerNames = playerDataAccess.getPlayerNames();
-        
+
         if (selectedPlayer != null && Arrays.stream(playerNames).anyMatch(selectedPlayer::equals)) {
             try {
                 String relativeIconPath = playerDataAccess.getPlayerIconByPlayerName(selectedPlayer);
                 String fileName = new File(relativeIconPath).getName();
                 int iconIndex = iconFileNames.indexOf(fileName);
-                
+
                 if (iconIndex == -1) {
                     System.out.println("Icon not found in loaded images");
                     return;
@@ -90,8 +87,6 @@ public class GameInitController {
             }
         }
     }
-    
-
 
     private void handleSaveButton(int playerIndex) {
         String playerName = view.getPlayerName(playerIndex);
@@ -141,7 +136,7 @@ public class GameInitController {
                     if (!relativeIconPath.startsWith(ICON_RELATIVE_PATH)) {
                         String iconFileName = new File(relativeIconPath).getName();
                         relativeIconPath = ICON_RELATIVE_PATH + iconFileName;
-                    
+
                     }
 
                     Player player = new Player(relativeIconPath, playerName);
@@ -149,7 +144,7 @@ public class GameInitController {
                 } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                 }
-        }
+            }
         }
 
         if (playerList.isEmpty()) {
@@ -158,8 +153,11 @@ public class GameInitController {
         for (Player player : playerList) {
             System.out.println("Player: " + player.getName() + ", Icon: " + player.getIcon());
         }
+
+        System.out.println("Player list size: " + playerList.size());
         return playerList;
     }
+
     public void start() {
         view.show();
     }

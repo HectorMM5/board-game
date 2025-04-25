@@ -18,7 +18,7 @@ import boardgame.model.effectFiles.SnakeEffect;
 
 public class BoardJSON {
 
-    public static Board constructSnLBoardFromJSON(int choice, GameController gameController) {
+    public static Board constructSnLBoardFromJSON(int choice) {
         Board board = new Board();
 
         try (InputStream is = BoardJSON.class.getClassLoader().getResourceAsStream("boards.json")) {
@@ -36,7 +36,7 @@ public class BoardJSON {
             JSONArray tilesWithEffects = SnLBoard.getJSONArray("tiles");
 
             IntStream.range(0, tilesWithEffects.length())
-                .forEach(i -> modifyEffectTileFromJSON(tilesWithEffects.getJSONObject(i), board, gameController));
+                .forEach(i -> modifyEffectTileFromJSON(tilesWithEffects.getJSONObject(i), board));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,7 +45,7 @@ public class BoardJSON {
         return board;
     }
 
-    public static void modifyEffectTileFromJSON(JSONObject tileWithEffect, Board board, GameController gameController) {
+    public static void modifyEffectTileFromJSON(JSONObject tileWithEffect, Board board) {
         int tileNumber = tileWithEffect.getInt("tile");
         String effectType = tileWithEffect.getString("effect");
 
@@ -70,7 +70,7 @@ public class BoardJSON {
                 break;
 
             case "Back":
-                effect = new BackToStartEffect();
+                effect = new BackToStartEffect(tileNumber, 1);
                 break;
 
             default:

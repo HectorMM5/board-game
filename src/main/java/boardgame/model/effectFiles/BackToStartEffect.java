@@ -9,7 +9,10 @@ import javafx.scene.paint.Color;
  * 
  * @author Hector Mendana Morales
  */
-public class BackToStartEffect implements Effect {
+public class BackToStartEffect extends MovementEffect {
+    public BackToStartEffect(int baseTileIndex, int targetTileIndex) {
+        super(baseTileIndex, targetTileIndex);
+    }
 
     @Override
     public void execute(Player player, GameController gameController) {
@@ -20,4 +23,5 @@ public class BackToStartEffect implements Effect {
     public Color getColor() {
         return Color.BLACK;
     }
+    
 }
