@@ -1,8 +1,6 @@
 package boardgame.visual.elements;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import boardgame.model.boardFiles.Board;
 import boardgame.model.boardFiles.Tile;
@@ -13,10 +11,6 @@ public class BoardVisual extends GridPane {
     private final Board board;
     private final ArrayList<Tile> tileLogic;
     private final ArrayList<TileVisual> tileViews;
-
-    Map<Integer, Integer> rows = new HashMap<>();
-    Map<Integer, Integer> cols = new HashMap<>();
-
 
     public BoardVisual(Board board) {
         this.board = board;
@@ -52,8 +46,7 @@ public class BoardVisual extends GridPane {
                 : board.getBoardWidth() - ((i % board.getBoardWidth()) + 1);
 
             this.add(tileVisual, col, row);
-            cols.put(tile.getNumber(), col);
-            rows.put(tile.getNumber(), row);
+
         }
     
     }
@@ -66,22 +59,6 @@ public class BoardVisual extends GridPane {
         
     }
 
-    public BoardVisual getBoardVisual() {
-        return this;
-    }
-
-    public Map<Integer, Integer> getRows() {
-        return rows;
-    }
-
-    public Map<Integer, Integer> getCols() {
-        return cols;
-    }
-
-
-    public void displayEffects() {
-        
-    }
 
 
 }

@@ -19,7 +19,10 @@ public class PlayerRowsVisual extends VBox {
     private List<HBox> playerRows = new ArrayList<>();
 
     public PlayerRowsVisual(List<Player> players) {
+        System.out.println("Reached PlayerRowsVisual with player list size: " + players.size());
         players.stream().forEach(i -> createPlayerRow(i));
+
+        
     }
 
     public void createPlayerRow(Player player) {

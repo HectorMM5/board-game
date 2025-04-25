@@ -1,40 +1,52 @@
 package boardgame.visual.scenes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import boardgame.controller.GameController;
-import boardgame.controller.VisualController;
 import boardgame.model.boardFiles.Board;
+import boardgame.model.boardFiles.Player;
 import boardgame.model.boardFiles.Tile;
+import boardgame.model.diceFiles.Dice;
 import boardgame.model.effectFiles.LadderEffect;
 import boardgame.model.effectFiles.SnakeEffect;
 import boardgame.utils.GameSetup;
 import boardgame.visual.elements.BoardVisual;
+import boardgame.visual.elements.ButtonVisual;
+import boardgame.visual.elements.SideColumnVisual;
+import boardgame.visual.gameLayers.PlayerTokenLayer;
 import boardgame.visual.gameLayers.SnakesNLadders.LadderLayer;
+import javafx.animation.PauseTransition;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Ingame {
 
     private final Board board;
     private final BoardVisual boardVisual;
-    private final VisualController visualController;
-    private final VBox sideColumn;
+    private final List<Player> players;
+    private final SideColumnVisual sideColumn;
+    private final PlayerTokenLayer playerTokenLayer;
+    private final Dice dice = new Dice(1);
     GameController gameController;
 
     public Ingame(GameSetup gameSetup) {
-        this.board = gameSetup.getBoard();
-        this.boardVisual = gameSetup.getBoardVisual();
         this.gameController = gameSetup.getGameController();
-        this.visualController = gameSetup.getVisualController();
-        this.sideColumn = gameSetup.getSideColumn();
+        this.board = gameSetup.getBoard();
+        this.boardVisual = new BoardVisual(board);
+        this.sideColumn = new SideColumnVisual(gameSetup.getGameController(), gameSetup.getPlayers(), this);
+        this.playerTokenLayer = new PlayerTokenLayer(gameSetup.getPlayers());
+        this.players = gameSetup.getPlayers();
 
     }
 
     public void createGameScene(Stage primaryStage) {
+
+        gameController.setIngame(this);
+
         StackPane centerPane = new StackPane();
         centerPane.getChildren().add(boardVisual);
     
@@ -66,12 +78,39 @@ public class Ingame {
     
         LadderLayer ladders = new LadderLayer(boardVisual, tilesWithLadders, tilesWithSnakes);
         centerPane.getChildren().add(ladders);
-        centerPane.getChildren().add(visualController.getPlayerTokenLayer());
+        centerPane.getChildren().add(playerTokenLayer);
         root.setCenter(centerPane);
 
         gameController.start();
     
         boardVisual.updateEntireBoard();
+    }
+
+    public void moveBy(Player player, int steps, ButtonVisual buttonVisual) {
+        int nextPosition = player.getPosition() + steps;
+
+        playerTokenLayer.movePlayerThroughPath(player, nextPosition);
+        PauseTransition finalPause = new PauseTransition(Duration.millis((nextPosition - player.getPosition() + 1) * 200));
+        finalPause.setOnFinished(event -> {
+            gameController.movePlayer(player, nextPosition);
+            sideColumn.turnOnButton();
+            
+        });
+        finalPause.play();
+
+    }
+
+    public void handleRollDice(ButtonVisual buttonVisual) {
+        int diceRoll = dice.roll();
+        System.out.println("Rolled: " + diceRoll);
+        moveBy(gameController.getCurrentPlayer(), diceRoll, buttonVisual);
+        sideColumn.displayRoll(diceRoll);
+        gameController.advanceTurn();
+
+    }
+
+    public void moveToken(Player player, int tileNumber) {
+        playerTokenLayer.moveToken(player, tileNumber);
     }
 
 }

@@ -3,8 +3,6 @@ import java.util.ArrayList;
 
 import boardgame.model.boardFiles.Player;
 import boardgame.utils.GameSetup;
-import boardgame.visual.scenes.Ingame;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class SnakesAndLaddersInitController extends GameInitController {
@@ -17,9 +15,8 @@ public class SnakesAndLaddersInitController extends GameInitController {
     public void startGame(){
         ArrayList<Player> playerList = this.getCurrentPlayers();
         if (playerList != null && playerList.size() > 1) {
-            
-            new Ingame(new GameSetup("SnL", 0, playerList)).createGameScene(this.primaryStage);
-            return;
+            System.out.println("Starting game with " + playerList.size() + " players.");
+            new GameSetup("SnL", 0, playerList).start(this.primaryStage);
         }
         System.out.println("Please select at least 2 players!");
     }

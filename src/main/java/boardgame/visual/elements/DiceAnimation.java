@@ -49,26 +49,26 @@ public class DiceAnimation extends GridPane {
     }
 
     public void displayRoll(int finalRoll) {
-    Timeline timeline = new Timeline();
+        Timeline timeline = new Timeline();
 
-    IntStream.rangeClosed(1,10).forEach(i -> {
-        int fakeRoll = random.nextInt(6) + 1;
+        IntStream.rangeClosed(1, 10).forEach(i -> {
+            int fakeRoll = random.nextInt(6) + 1;
 
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(i * 50), e -> {
-            displayFace(fakeRoll);
+            KeyFrame keyFrame = new KeyFrame(Duration.millis(i * 50), e -> {
+                displayFace(fakeRoll);
+            });
+
+            timeline.getKeyFrames().add(keyFrame);
+
         });
 
-        timeline.getKeyFrames().add(keyFrame);
+        KeyFrame finalKeyFrame = new KeyFrame(Duration.millis(500), e -> {
+            displayFace(finalRoll);
+        });
 
-    });
-
-    KeyFrame finalKeyFrame = new KeyFrame(Duration.millis(500), e -> {
-        displayFace(finalRoll);
-    });
-
-    timeline.getKeyFrames().add(finalKeyFrame);
-    timeline.play();
-}
+        timeline.getKeyFrames().add(finalKeyFrame);
+        timeline.play();
+    }
 
     public void displayFace(int roll) {
         points.forEach(c -> c.setFill(Color.WHITE));
